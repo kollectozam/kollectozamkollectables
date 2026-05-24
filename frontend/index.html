@@ -1,422 +1,536 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0a0f">
-  <meta name="description" content="Kollectozam Kollectables — Brunei's premier live claim sale platform for Pokémon, Naruto Kayou, One Piece TCG and more. Catch it. Claim it. Collect it.">
-  <title>Kollectozam Kollectables — Live Claim Sales</title>
-  <link rel="icon" href="assets/img/logo.png" type="image/png">
-  <link rel="stylesheet" href="assets/css/main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kollectozam Kollectables — Live Claim Drops</title>
+<link rel="icon" href="assets/logo.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#F5F3F0; --bg-2:#EFEAE3; --surface:#FFFFFF;
+  --ink:#111111; --ink-2:#444444; --ink-3:#888888;
+  --border:#E2DDD6; --border-2:#CCC8C0;
+  --purple:#5B2E8A; --purple-lt:#7340AC; --purple-bg:#F2EDF9;
+  --gold:#B8913A; --gold-bg:#FDF6E3;
+  --orange:#C96A10; --orange-bg:#FEF3E7;
+  --red:#C0202E; --red-bg:#FEF0F0;
+  --green:#1A7F4B; --green-bg:#EDFAF3;
+  --ff-head:'Bebas Neue',sans-serif;
+  --ff-prod:'Sora',sans-serif;
+  --ff-ui:'Inter',sans-serif;
+  --nav-h:60px; --radius:12px; --radius-sm:8px; --t:0.2s ease;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--ff-ui); background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; }
+img { display:block; max-width:100%; }
+button { cursor:pointer; font-family:inherit; }
+a { text-decoration:none; color:inherit; }
 
-  <!-- API Base (update before deployment) -->
-  <script>
-    window.KZ_API_BASE = 'https://kollectozam-api.YOUR_SUBDOMAIN.workers.dev';
-    window.KZ_WA_NUMBER = '6738123456';
-  </script>
+/* NAV */
+.nav { position:sticky; top:0; z-index:100; height:var(--nav-h); background:rgba(245,243,240,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 16px; gap:10px; }
+.nav-logo { flex:1; display:flex; align-items:center; }
+.nav-logo img { height:38px; width:auto; object-fit:contain; }
+.nav-search { display:flex; align-items:center; background:var(--surface); border:1px solid var(--border); border-radius:100px; padding:0 12px; gap:7px; flex:1; max-width:260px; }
+.nav-search input { flex:1; border:none; outline:none; background:transparent; font-family:var(--ff-ui); font-size:13px; color:var(--ink); padding:9px 0; }
+.nav-search input::placeholder { color:var(--ink-3); }
+.nav-search svg { color:var(--ink-3); flex-shrink:0; }
+.nav-cart { position:relative; background:var(--purple); color:#fff; border:none; border-radius:100px; padding:9px 16px; font-family:var(--ff-ui); font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px; transition:background var(--t); white-space:nowrap; }
+.nav-cart:hover { background:var(--purple-lt); }
+.nav-badge { background:#fff; color:var(--purple); border-radius:100px; font-size:11px; font-weight:700; min-width:18px; height:18px; padding:0 4px; display:none; align-items:center; justify-content:center; }
+
+/* TICKER */
+.ticker-wrap { background:var(--ink); padding:9px 0; overflow:hidden; white-space:nowrap; }
+.ticker-track { display:inline-block; animation:ticker 40s linear infinite; }
+.ticker-track:hover { animation-play-state:paused; }
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.ticker-item { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:500; color:#fff; padding:0 26px; }
+.ticker-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+.ticker-sep { color:rgba(255,255,255,0.25); padding:0 2px; }
+
+/* HERO */
+.hero { padding:52px 20px 44px; text-align:center; max-width:660px; margin:0 auto; }
+.hero-eyebrow { display:inline-flex; align-items:center; gap:7px; background:var(--purple-bg); color:var(--purple); font-size:11px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; padding:6px 14px; border-radius:100px; margin-bottom:20px; }
+.hero-eyebrow-dot { width:6px; height:6px; border-radius:50%; background:var(--purple); animation:pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+.hero h1 { font-family:var(--ff-head); font-size:clamp(50px,13vw,86px); line-height:0.95; color:var(--ink); letter-spacing:1px; margin-bottom:16px; }
+.hero h1 em { color:var(--purple); font-style:normal; }
+.hero-sub { font-size:15px; color:var(--ink-2); line-height:1.6; margin-bottom:30px; }
+.hero-ctas { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+.btn-primary { background:var(--purple); color:#fff; border:none; border-radius:100px; padding:14px 26px; font-family:var(--ff-ui); font-size:14px; font-weight:700; transition:background var(--t),transform var(--t); }
+.btn-primary:hover { background:var(--purple-lt); transform:translateY(-1px); }
+.btn-secondary { background:transparent; color:var(--ink); border:1.5px solid var(--border-2); border-radius:100px; padding:12px 24px; font-family:var(--ff-ui); font-size:14px; font-weight:600; transition:border-color var(--t); display:flex; align-items:center; gap:8px; }
+.btn-secondary:hover { border-color:var(--ink-2); }
+
+/* CHIPS */
+.chips { display:flex; gap:8px; flex-wrap:wrap; padding:0 20px; margin-bottom:24px; max-width:680px; margin-left:auto; margin-right:auto; }
+.chip { background:var(--surface); color:var(--ink-2); border:1.5px solid var(--border); border-radius:100px; padding:7px 15px; font-size:13px; font-weight:500; transition:all var(--t); }
+.chip:hover { border-color:var(--purple); color:var(--purple); }
+.chip.active { background:var(--purple); color:#fff; border-color:var(--purple); }
+
+/* SECTION */
+.section { padding:0 20px 52px; max-width:680px; margin:0 auto; }
+.section-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:22px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+.section-title { font-family:var(--ff-head); font-size:28px; letter-spacing:0.5px; }
+.section-count { font-size:12px; font-weight:600; color:var(--ink-3); }
+
+/* FEED */
+#feed, #backupFeed { display:flex; flex-direction:column; gap:18px; }
+
+/* CLAIM CARD */
+.ccard { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:box-shadow var(--t),transform var(--t); }
+.ccard:hover { box-shadow:0 8px 28px rgba(0,0,0,0.08); transform:translateY(-2px); }
+.ccard.sold { opacity:0.55; pointer-events:none; }
+.ccard-img { position:relative; aspect-ratio:4/3; background:var(--bg-2); overflow:hidden; }
+.ccard-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; }
+.ccard:hover .ccard-img img { transform:scale(1.03); }
+.ccard-img-placeholder { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:var(--ink-3); font-size:48px; }
+.ccard-img-placeholder p { font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+.status-badge { position:absolute; top:12px; left:12px; padding:5px 11px; border-radius:6px; font-family:var(--ff-ui); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; }
+.badge-available { background:var(--purple); color:#fff; }
+.badge-pending   { background:var(--orange-bg); color:var(--orange); }
+.badge-sold      { background:var(--red-bg); color:var(--red); }
+.badge-relisted  { background:var(--gold-bg); color:var(--gold); border:1px solid #B8913A40; }
+.urgency-tag { position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.72); backdrop-filter:blur(6px); color:#fff; font-size:11px; font-weight:600; padding:5px 10px; border-radius:6px; display:flex; align-items:center; gap:5px; }
+.urgency-dot { width:5px; height:5px; border-radius:50%; background:#ff4d6d; }
+.ccard-body { padding:16px 16px 18px; }
+.ccard-cat { font-size:11px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--ink-3); margin-bottom:5px; }
+.ccard-name { font-family:var(--ff-prod); font-size:18px; font-weight:700; color:var(--ink); line-height:1.25; margin-bottom:12px; }
+.ccard-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+.ccard-price { font-family:var(--ff-prod); font-size:22px; font-weight:700; }
+.ccard-stock { font-size:12px; font-weight:600; color:var(--ink-3); }
+.stock-low { color:var(--orange); }
+.ccard-footer { display:flex; align-items:center; gap:10px; }
+.btn-claim { flex:1; background:var(--purple); color:#fff; border:none; border-radius:100px; padding:13px 18px; font-family:var(--ff-ui); font-size:14px; font-weight:700; transition:background var(--t),transform var(--t); }
+.btn-claim:hover { background:var(--purple-lt); transform:translateY(-1px); }
+.btn-claim:disabled { background:var(--bg-2); color:var(--ink-3); cursor:default; transform:none; }
+.btn-claim.added { background:var(--green-bg); color:var(--green); }
+.btn-wa-item { width:46px; height:46px; border-radius:100px; background:#25D366; color:#fff; border:none; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; transition:background var(--t); }
+.btn-wa-item:hover { background:#1ebe5d; }
+
+/* BACKUP BANNER */
+.backup-banner { background:linear-gradient(135deg,var(--gold-bg),#FFF8E8); border:1.5px solid #D4A84050; border-radius:var(--radius); padding:14px 16px; margin-bottom:18px; display:flex; align-items:center; gap:12px; }
+.backup-icon { font-size:22px; flex-shrink:0; }
+.backup-label { font-size:11px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--gold); margin-bottom:2px; }
+.backup-desc { font-size:13px; color:var(--ink-2); line-height:1.4; }
+
+/* WA SECTION */
+.wa-block { padding:0 20px; max-width:680px; margin:0 auto 52px; }
+.wa-inner { background:var(--ink); border-radius:var(--radius); padding:36px 24px; text-align:center; }
+.wa-inner h2 { font-family:var(--ff-head); font-size:32px; color:#fff; margin-bottom:10px; }
+.wa-inner p { font-size:14px; color:rgba(255,255,255,0.55); margin-bottom:22px; line-height:1.6; }
+.btn-wa-full { display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#fff; border:none; border-radius:100px; padding:14px 30px; font-family:var(--ff-ui); font-size:14px; font-weight:700; transition:background var(--t); }
+.btn-wa-full:hover { background:#1ebe5d; }
+
+/* SKELETON */
+.feed-loading { display:flex; flex-direction:column; gap:18px; }
+.skeleton { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.skel-img { aspect-ratio:4/3; background:linear-gradient(90deg,var(--bg) 25%,var(--bg-2) 50%,var(--bg) 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; }
+.skel-body { padding:16px; display:flex; flex-direction:column; gap:10px; }
+.skel-line { height:13px; border-radius:100px; background:linear-gradient(90deg,var(--bg) 25%,var(--bg-2) 50%,var(--bg) 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; }
+.skel-line.short { width:38%; } .skel-line.med { width:62%; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.feed-empty { text-align:center; padding:56px 20px; color:var(--ink-3); }
+.feed-empty p { font-size:15px; margin-top:12px; }
+
+/* FLOAT CART */
+.float-cart { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:90; background:var(--ink); color:#fff; border:none; border-radius:100px; padding:13px 26px; font-family:var(--ff-ui); font-size:14px; font-weight:700; box-shadow:0 8px 28px rgba(0,0,0,0.2); display:flex; align-items:center; gap:10px; transition:transform var(--t),box-shadow var(--t); white-space:nowrap; }
+.float-cart:hover { transform:translateX(-50%) translateY(-2px); box-shadow:0 12px 36px rgba(0,0,0,0.28); }
+.float-cart.hidden { display:none; }
+.float-badge { background:var(--purple); color:#fff; border-radius:100px; font-size:11px; font-weight:700; min-width:20px; height:20px; padding:0 5px; display:flex; align-items:center; justify-content:center; }
+
+/* TOASTS */
+#toasts { position:fixed; top:76px; right:14px; z-index:200; display:flex; flex-direction:column; gap:8px; }
+.toast { background:var(--ink); color:#fff; padding:11px 16px; border-radius:var(--radius-sm); font-size:13px; font-weight:500; box-shadow:0 4px 14px rgba(0,0,0,0.15); animation:slideIn 0.2s ease; }
+.toast.error { background:var(--red); }
+@keyframes slideIn { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
+
+/* OVERLAY */
+.overlay { position:fixed; inset:0; z-index:150; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); display:none; align-items:flex-end; justify-content:center; }
+.overlay.open { display:flex; }
+@media(min-width:600px) { .overlay{align-items:center;padding:20px} }
+.modal { background:var(--surface); width:100%; max-width:520px; max-height:92vh; overflow-y:auto; border-radius:20px 20px 0 0; padding-bottom:env(safe-area-inset-bottom,20px); }
+@media(min-width:600px) { .modal{border-radius:16px} }
+.modal-head { position:sticky; top:0; z-index:1; background:var(--surface); display:flex; align-items:center; justify-content:space-between; padding:18px 18px 14px; border-bottom:1px solid var(--border); }
+.modal-title { font-family:var(--ff-prod); font-size:16px; font-weight:700; }
+.modal-close { width:30px; height:30px; border-radius:50%; background:var(--bg); border:none; font-size:15px; color:var(--ink-2); display:flex; align-items:center; justify-content:center; }
+.modal-close:hover { background:var(--border); }
+.modal-body { padding:18px; }
+
+/* CART */
+.cart-list { display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
+.ci { display:flex; align-items:center; gap:11px; padding:11px; background:var(--bg); border-radius:var(--radius-sm); }
+.ci-thumb { width:50px; height:50px; border-radius:7px; object-fit:cover; flex-shrink:0; background:var(--bg-2); display:flex; align-items:center; justify-content:center; font-size:20px; }
+.ci-info { flex:1; min-width:0; }
+.ci-name { font-weight:600; font-size:13px; color:var(--ink); line-height:1.3; }
+.ci-price { font-size:12px; color:var(--ink-3); margin-top:3px; }
+.ci-del { background:none; border:none; color:var(--red); font-size:16px; padding:4px; line-height:1; }
+.cart-total-row { display:flex; justify-content:space-between; align-items:center; padding:14px 0 18px; border-top:1px solid var(--border); }
+.cart-total-label { font-size:14px; font-weight:600; color:var(--ink-2); }
+.cart-total-val { font-family:var(--ff-prod); font-size:20px; font-weight:700; }
+.btn-checkout { width:100%; background:var(--purple); color:#fff; border:none; border-radius:100px; padding:14px; font-family:var(--ff-ui); font-size:15px; font-weight:700; transition:background var(--t); }
+.btn-checkout:hover:not(:disabled) { background:var(--purple-lt); }
+.btn-checkout:disabled { background:var(--bg-2); color:var(--ink-3); cursor:default; }
+
+/* CHECKOUT FORM */
+.form-group { margin-bottom:14px; }
+.form-label { display:block; font-size:11px; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; color:var(--ink-2); margin-bottom:6px; }
+.form-input,.form-select { width:100%; background:var(--bg); border:1.5px solid var(--border); border-radius:var(--radius-sm); padding:11px 13px; font-family:var(--ff-ui); font-size:14px; color:var(--ink); transition:border-color var(--t); }
+.form-input:focus,.form-select:focus { outline:none; border-color:var(--purple); background:var(--surface); }
+.form-select { appearance:none; cursor:pointer; }
+.order-summary { background:var(--bg); border-radius:var(--radius-sm); padding:13px; margin-bottom:18px; }
+.osb-title { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--ink-3); margin-bottom:9px; }
+.osb-item { display:flex; justify-content:space-between; font-size:13px; color:var(--ink); padding:3px 0; }
+.osb-total { display:flex; justify-content:space-between; align-items:center; padding-top:9px; margin-top:7px; border-top:1px solid var(--border); }
+.osb-total-label { font-size:13px; font-weight:600; color:var(--ink-2); }
+.osb-total-val { font-family:var(--ff-prod); font-size:18px; font-weight:700; }
+
+/* PAY PANEL */
+.pay-panel { background:var(--purple-bg); border:1px solid #7340AC25; border-radius:var(--radius-sm); padding:13px; margin-top:10px; margin-bottom:14px; }
+.pay-panel-title { font-size:11px; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; color:var(--purple); margin-bottom:9px; }
+.pay-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid #7340AC12; font-size:13px; gap:12px; }
+.pay-row:last-child { border-bottom:none; }
+.pr-label { color:var(--ink-3); font-weight:500; flex-shrink:0; }
+.pr-val { color:var(--ink); font-weight:600; text-align:right; display:flex; align-items:center; gap:8px; }
+.btn-copy { background:var(--purple); color:#fff; border:none; border-radius:6px; padding:3px 10px; font-size:11px; font-weight:700; transition:background var(--t); }
+.btn-copy:hover { background:var(--purple-lt); }
+.pay-note { font-size:11.5px; color:var(--orange); line-height:1.5; margin-top:9px; padding-top:9px; border-top:1px solid #7340AC12; }
+.btn-place { width:100%; background:var(--purple); color:#fff; border:none; border-radius:100px; padding:14px; font-family:var(--ff-ui); font-size:15px; font-weight:700; transition:background var(--t); margin-top:6px; }
+.btn-place:hover { background:var(--purple-lt); }
+
+/* SUCCESS */
+.success-body { padding:40px 20px; text-align:center; }
+.success-icon { width:68px; height:68px; border-radius:50%; background:var(--green-bg); margin:0 auto 18px; display:flex; align-items:center; justify-content:center; font-size:32px; }
+.success-title { font-family:var(--ff-head); font-size:30px; color:var(--ink); margin-bottom:8px; }
+.success-oid { display:inline-block; background:var(--purple-bg); color:var(--purple); font-family:var(--ff-prod); font-size:17px; font-weight:700; padding:7px 18px; border-radius:8px; margin-bottom:14px; }
+.success-msg { font-size:14px; color:var(--ink-2); line-height:1.6; margin-bottom:26px; }
+.btn-wa-success { width:100%; background:#25D366; color:#fff; border:none; border-radius:100px; padding:14px; font-family:var(--ff-ui); font-size:15px; font-weight:700; display:flex; align-items:center; justify-content:center; gap:10px; transition:background var(--t); margin-bottom:10px; }
+.btn-wa-success:hover { background:#1ebe5d; }
+.btn-done { width:100%; background:transparent; color:var(--ink-2); border:1.5px solid var(--border); border-radius:100px; padding:12px; font-family:var(--ff-ui); font-size:14px; font-weight:600; transition:border-color var(--t); }
+.btn-done:hover { border-color:var(--ink-2); color:var(--ink); }
+
+/* FOOTER */
+footer { text-align:center; padding:28px 20px 44px; border-top:1px solid var(--border); color:var(--ink-3); font-size:12px; line-height:1.8; }
+footer img { height:26px; margin:0 auto 10px; }
+</style>
 </head>
 <body>
 
-<!-- ── Navbar ── -->
-<nav class="navbar">
-  <a href="index.html" class="navbar-brand">
-    <img src="assets/img/logo.png" alt="KZ" class="navbar-logo">
-    <div class="navbar-wordmark">KOLLECTO<span>ZAM</span><br><small style="font-size:9px;letter-spacing:2px;color:var(--kz-muted);font-weight:400;">KOLLECTABLES</small></div>
-  </a>
-  <div class="navbar-live-badge">
-    <span class="live-dot"></span>
-    LIVE CLAIMS
+<nav class="nav">
+  <div class="nav-logo">
+    <a href="/"><img src="assets/logo.png" alt="Kollectozam Kollectables"></a>
   </div>
-  <button class="navbar-menu-btn" id="nav-menu-btn" aria-label="Menu">
-    <span></span><span></span><span></span>
+  <div class="nav-search">
+    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search cards…" oninput="filterCards()">
+  </div>
+  <button class="nav-cart" onclick="openModal('cartOverlay')">
+    <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    Bag
+    <span class="nav-badge" id="hdrBadge"></span>
   </button>
 </nav>
 
-<!-- ── Nav Drawer ── -->
-<div class="nav-drawer" id="nav-drawer">
-  <div class="nav-section-label">Main</div>
-  <a href="index.html" class="nav-item active"><span class="nav-item-icon">🏠</span> Home</a>
-  <a href="pages/live-claims.html" class="nav-item"><span class="nav-item-icon">⚡</span> Live Claims</a>
+<div class="ticker-wrap"><div class="ticker-track" id="tickerTrack"></div></div>
 
-  <div class="nav-divider"></div>
-  <div class="nav-section-label">Shop by Category</div>
-  <a href="pages/pokemon.html" class="nav-item"><span class="nav-item-icon">⚡</span> Pokémon Singles</a>
-  <a href="pages/naruto-boxes.html" class="nav-item"><span class="nav-item-icon">📦</span> Naruto Boxes</a>
-  <a href="pages/naruto-singles.html" class="nav-item"><span class="nav-item-icon">🍃</span> Naruto Singles</a>
-  <a href="pages/onepiece.html" class="nav-item"><span class="nav-item-icon">☠️</span> One Piece Singles</a>
-
-  <div class="nav-divider"></div>
-  <div class="nav-section-label">Discover</div>
-  <a href="pages/recently-claimed.html" class="nav-item"><span class="nav-item-icon">✅</span> Recently Claimed</a>
-  <a href="pages/backup.html" class="nav-item"><span class="nav-item-icon">🔄</span> Back Up For Claim</a>
-  <a href="pages/how-it-works.html" class="nav-item"><span class="nav-item-icon">❓</span> How It Works</a>
-  <a href="pages/contact.html" class="nav-item"><span class="nav-item-icon">💬</span> Contact / WhatsApp</a>
-</div>
-
-<!-- ── Page ── -->
-<div class="page-wrapper">
-
-  <!-- ── Hero ── -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <div class="hero-mascot-wrap">
-        <img src="assets/img/logo.png" alt="Kollectozam" class="hero-mascot">
-        <div class="hero-mascot-glow"></div>
-      </div>
-
-      <div class="hero-eyebrow">
-        <span class="live-dot"></span>
-        🔥 Brunei's Live Claim Platform
-      </div>
-
-      <h1 class="hero-headline">
-        <div class="line-white">CATCH IT.</div>
-        <div class="line-purple">CLAIM IT.</div>
-        <div class="line-gold">COLLECT IT.</div>
-      </h1>
-
-      <p class="hero-sub">
-        Real-time claim drops for Pokémon, Naruto Kayou, and One Piece TCG.<br>
-        No auctions. No carts. Pure collector culture.
-      </p>
-
-      <div class="hero-ctas">
-        <a href="pages/live-claims.html" class="btn btn-primary">⚡ View Live Claims</a>
-        <a href="pages/how-it-works.html" class="btn btn-outline">How It Works</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="glow-line"></div>
-
-  <!-- ── Live Claims Section ── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div>
-          <div class="section-title">⚡ <span class="section-title-accent">LIVE CLAIMS</span></div>
-          <div class="section-subtitle">Currently reserved — payment pending</div>
-        </div>
-        <a href="pages/live-claims.html" class="section-link">View All →</a>
-      </div>
-      <div class="cards-grid fade-in" id="live-claims-grid">
-        <div class="loading-state" style="grid-column:1/-1">
-          <div class="loading-spinner"></div>
-          <div>Loading live claims...</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- ── Available Now Section ── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div>
-          <div class="section-title">🃏 AVAILABLE <span class="section-title-accent">NOW</span></div>
-          <div class="section-subtitle">Fresh drops ready to claim</div>
-        </div>
-        <a href="pages/live-claims.html" class="section-link">See All →</a>
-      </div>
-
-      <div class="category-pills" id="category-pills">
-        <button class="pill active" data-cat="all">All</button>
-        <button class="pill" data-cat="pokemon">⚡ Pokémon</button>
-        <button class="pill" data-cat="naruto-boxes">📦 Naruto Boxes</button>
-        <button class="pill" data-cat="naruto-singles">🍃 Naruto Singles</button>
-        <button class="pill" data-cat="onepiece">☠️ One Piece</button>
-      </div>
-
-      <div class="cards-grid fade-in" id="available-grid">
-        <div class="loading-state" style="grid-column:1/-1">
-          <div class="loading-spinner"></div>
-          <div>Loading items...</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- ── Back Up For Claim ── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div>
-          <div class="section-title">🔄 BACK UP <span class="section-title-accent">FOR CLAIM</span></div>
-          <div class="section-subtitle">Returned from expired reservations</div>
-        </div>
-        <a href="pages/backup.html" class="section-link">View All →</a>
-      </div>
-      <div class="cards-grid fade-in" id="backup-grid">
-        <div class="loading-state" style="grid-column:1/-1">
-          <div class="loading-spinner"></div>
-          <div>Loading...</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- ── Recently Claimed ── -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-in">
-        <div>
-          <div class="section-title">✅ RECENTLY <span class="section-title-accent">CLAIMED</span></div>
-          <div class="section-subtitle">Successfully sold to collectors</div>
-        </div>
-        <a href="pages/recently-claimed.html" class="section-link">View All →</a>
-      </div>
-      <div class="cards-grid fade-in" id="sold-grid">
-        <div class="loading-state" style="grid-column:1/-1">
-          <div class="loading-spinner"></div>
-          <div>Loading...</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="glow-line"></div>
-
-  <!-- ── How It Works ── -->
-  <section class="section how-it-works">
-    <div class="container">
-      <div class="section-header fade-in" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;">
-        <div class="section-title">HOW <span class="section-title-accent">IT WORKS</span></div>
-        <div class="section-subtitle">Simple. Fast. Collector-first.</div>
-      </div>
-
-      <div class="steps-grid fade-in">
-        <div class="step-card">
-          <div class="step-number">1</div>
-          <div class="step-icon">🃏</div>
-          <div class="step-title">Browse Drops</div>
-          <div class="step-desc">Browse live items available for claim.</div>
-        </div>
-        <div class="step-card">
-          <div class="step-number">2</div>
-          <div class="step-icon">⚡</div>
-          <div class="step-title">Claim Now</div>
-          <div class="step-desc">Hit CLAIM NOW to instantly reserve the item.</div>
-        </div>
-        <div class="step-card">
-          <div class="step-number">3</div>
-          <div class="step-icon">💬</div>
-          <div class="step-title">Send Payment</div>
-          <div class="step-desc">Send proof via WhatsApp before timer runs out.</div>
-        </div>
-        <div class="step-card">
-          <div class="step-number">4</div>
-          <div class="step-icon">📦</div>
-          <div class="step-title">Collect!</div>
-          <div class="step-desc">Pick up your card and add it to your collection.</div>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:24px;">
-        <a href="pages/how-it-works.html" class="btn btn-outline">Full Guide →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── WhatsApp CTA ── -->
-  <section class="wa-cta">
-    <div class="wa-cta-title">Questions? We're on WhatsApp 💬</div>
-    <div class="wa-cta-sub">Message us for inquiries, item requests, or payment help.</div>
-    <div class="wa-cta-number">📱 +673 8XX XXXX</div>
-    <a href="https://wa.me/6738123456?text=Hi+Kollectozam!+I+have+a+question." class="btn btn-wa" style="max-width:280px;margin:0 auto;">
-      Open WhatsApp →
+<section class="hero">
+  <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Live Claims Now Open</div>
+  <h1>CLAIM IT<br><em>BEFORE</em><br>IT'S GONE</h1>
+  <p class="hero-sub">Real-time collectible drops — Pokémon, One Piece, Naruto, Digimon &amp; more. Once it's claimed, it's gone.</p>
+  <div class="hero-ctas">
+    <button class="btn-primary" onclick="document.getElementById('liveclaims').scrollIntoView({behavior:'smooth'})">View Live Claims</button>
+    <a class="btn-secondary" href="https://wa.me/6737409444" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      WhatsApp Alerts
     </a>
-  </section>
+  </div>
+</section>
 
-  <!-- ── Footer ── -->
-  <footer class="footer">
-    <img src="assets/img/logo.png" alt="KZ" class="footer-logo">
-    <div class="footer-brand">KOLLECTO<span>ZAM</span> KOLLECTABLES</div>
-    <div class="footer-tagline">Brunei's Live Claim Platform for TCG Collectors</div>
-    <div class="footer-links">
-      <a href="pages/live-claims.html">Live Claims</a>
-      <a href="pages/pokemon.html">Pokémon</a>
-      <a href="pages/naruto-boxes.html">Naruto Boxes</a>
-      <a href="pages/onepiece.html">One Piece</a>
-      <a href="pages/how-it-works.html">How It Works</a>
-      <a href="pages/contact.html">Contact</a>
-      <a href="pages/admin.html">Admin</a>
-    </div>
-    <div class="footer-copy">© 2024 Kollectozam Kollectables. Brunei Darussalam. All rights reserved.</div>
-  </footer>
-
+<div class="chips">
+  <button class="chip active" onclick="setCat('ALL',this)">All</button>
+  <button class="chip" onclick="setCat('Pokemon',this)">Pokémon</button>
+  <button class="chip" onclick="setCat('One Piece',this)">One Piece</button>
+  <button class="chip" onclick="setCat('Naruto',this)">Naruto</button>
+  <button class="chip" onclick="setCat('Digimon',this)">Digimon</button>
+  <button class="chip" onclick="setCat('DBZ',this)">DBZ</button>
+  <button class="chip" onclick="setCat('Ultraman',this)">Ultraman</button>
 </div>
 
-<!-- ── Claim Modal ── -->
-<div class="modal-overlay" id="claim-modal">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div id="modal-product-info" class="modal-header"></div>
-
-    <!-- Form State -->
-    <div id="claim-form-wrap">
-      <div class="modal-title">🔒 Reserve This Item</div>
-
-      <form id="claim-form" novalidate>
-        <div class="form-group">
-          <label class="form-label" for="claim-name">Your Name *</label>
-          <input type="text" id="claim-name" class="form-input" placeholder="Full name" required maxlength="100">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="claim-wa">WhatsApp Number *</label>
-          <input type="tel" id="claim-wa" class="form-input" placeholder="e.g. 6738123456" required maxlength="20">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="claim-pickup">Pickup Option</label>
-          <select id="claim-pickup" class="form-input">
-            <option value="pickup">Self-pickup (Brunei)</option>
-            <option value="delivery">Delivery (discuss with seller)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="claim-payment">Payment Method</label>
-          <select id="claim-payment" class="form-input">
-            <option value="beret">Beret (QR Transfer)</option>
-            <option value="cash">Cash on Pickup</option>
-          </select>
-        </div>
-        <div class="form-note">
-          ⏱ You will have a limited time to send payment proof via WhatsApp after claiming.
-        </div>
-        <div style="margin-top:16px;">
-          <button type="submit" id="claim-submit-btn" class="btn-claim">⚡ CLAIM NOW</button>
-        </div>
-        <div style="margin-top:10px;">
-          <button type="button" class="btn btn-outline" style="width:100%" onclick="closeClaimModal()">Cancel</button>
-        </div>
-      </form>
+<section class="section" id="liveclaims">
+  <div class="section-head">
+    <h2 class="section-title">LIVE CLAIMS</h2>
+    <span class="section-count" id="productCount"></span>
+  </div>
+  <div id="feed">
+    <div class="feed-loading" id="skeletons">
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line short"></div><div class="skel-line med"></div><div class="skel-line short"></div></div></div>
+      <div class="skeleton"><div class="skel-img"></div><div class="skel-body"><div class="skel-line short"></div><div class="skel-line med"></div><div class="skel-line short"></div></div></div>
     </div>
+  </div>
+</section>
 
-    <!-- Success State -->
-    <div id="claim-success-wrap" class="claim-success hidden">
-      <div class="claim-success-icon">🎉</div>
-      <div class="claim-success-title">ITEM RESERVED!</div>
-      <div class="claim-success-text">Send payment proof via WhatsApp before the timer expires.</div>
-      <div class="claim-timer-display" id="success-timer">--:--</div>
-      <a href="#" id="open-wa-btn" class="btn-wa" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;">
-        💬 Open WhatsApp Now
-      </a>
-      <button class="btn btn-outline" style="width:100%" onclick="closeClaimModal()">Close</button>
+<section class="section" id="backup-section" style="display:none">
+  <div class="section-head">
+    <h2 class="section-title">BACK UP FOR CLAIM</h2>
+    <span class="section-count">Second chance</span>
+  </div>
+  <div class="backup-banner">
+    <div class="backup-icon">🔄</div>
+    <div>
+      <div class="backup-label">Claim Expired — Available Again</div>
+      <div class="backup-desc">Previously claimed items where payment was not completed. Your second chance.</div>
+    </div>
+  </div>
+  <div id="backupFeed"></div>
+</section>
+
+<div class="wa-block">
+  <div class="wa-inner">
+    <h2>NEVER MISS A DROP</h2>
+    <p>Get instant WhatsApp alerts when new items are listed. Be first in line every time.</p>
+    <a class="btn-wa-full" href="https://wa.me/6737409444?text=Hi%2C%20I%20want%20to%20join%20the%20Kollectozam%20drop%20alerts!" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      Join WhatsApp Alerts
+    </a>
+  </div>
+</div>
+
+<footer>
+  <img src="assets/logo.png" alt="Kollectozam Kollectables">
+  Pokémon · One Piece · Naruto · Digimon · DBZ · Ultraman<br>
+  © 2025 Kollectozam Kollectables. Brunei.
+</footer>
+
+<button class="float-cart hidden" id="floatCart" onclick="openModal('cartOverlay')">
+  🛒 <span id="floatLabel">Claim Bag</span>
+  <span class="float-badge" id="floatBadge">0</span>
+</button>
+<div id="toasts"></div>
+
+<!-- CART MODAL -->
+<div class="overlay" id="cartOverlay">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Claim Bag</span><button class="modal-close" onclick="closeModal('cartOverlay')">✕</button></div>
+    <div class="modal-body">
+      <div id="cartBody"></div>
+      <div class="cart-total-row"><span class="cart-total-label">Total</span><span class="cart-total-val" id="cartTot">BND $0.00</span></div>
+      <button class="btn-checkout" id="btnCheckout" onclick="openCheckout()">Proceed to Claim →</button>
     </div>
   </div>
 </div>
 
-<script src="assets/js/main.js"></script>
+<!-- CHECKOUT MODAL -->
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Complete Your Claim</span><button class="modal-close" onclick="closeModal('checkoutOverlay')">✕</button></div>
+    <div class="modal-body">
+      <div class="order-summary">
+        <div class="osb-title">Order Summary</div>
+        <div id="osbItems"></div>
+        <div class="osb-total"><span class="osb-total-label">Total</span><span class="osb-total-val" id="osbTotal"></span></div>
+      </div>
+      <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" id="fName" type="text" placeholder="Full name"></div>
+      <div class="form-group"><label class="form-label">WhatsApp Number</label><input class="form-input" id="fPhone" type="tel" placeholder="+673 7XX XXXX"></div>
+      <div class="form-group">
+        <label class="form-label">Pickup Location</label>
+        <select class="form-select" id="fPickup"><option value="">Select location…</option><option>Gadong</option><option>Kiulap</option><option>Manggis</option><option>Rimba</option><option>Tutong</option><option>Seria</option><option>Other</option></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Payment Method</label>
+        <select class="form-select" id="fPayment" onchange="refreshPayPanel()"><option value="">Select method…</option><option>BIBD</option><option>Baiduri</option><option>VCard</option><option>Cash</option></select>
+        <div id="payPanel"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Drop / Pickup Timing</label>
+        <select class="form-select" id="fTiming"><option value="">Select timing…</option><option>Same day</option><option>Next day</option><option>This weekend</option><option>To be arranged</option></select>
+      </div>
+      <button class="btn-place" onclick="placeOrder()">Confirm Claim →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="overlay" id="successOverlay">
+  <div class="modal">
+    <div class="success-body">
+      <div class="success-icon">✓</div>
+      <div class="success-title">CLAIM LOCKED IN</div>
+      <div class="success-oid" id="oIdDisplay">#0001</div>
+      <p class="success-msg">Your claim is reserved. Pay and send the screenshot via WhatsApp to finalise your order.</p>
+      <button class="btn-wa-success" onclick="doWhatsApp()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Send Payment via WhatsApp
+      </button>
+      <button class="btn-done" onclick="closeModal('successOverlay')">Back to Claims</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ── Homepage data loading ─────────────────────────────────
+const API       = 'https://kollectozam-kollectables-api.kollectozam.workers.dev';
+const WA_NUMBER = '6737409444';
+const PAYMENT = {
+  BIBD:    { rows:[['Bank','Bank Islam Brunei Darussalam (BIBD)'],['Account Name','KOLLECTOZAM'],['Account Number','0123456789']] },
+  Baiduri: { rows:[['Bank','Baiduri Bank Berhad'],['Account Name','KOLLECTOZAM'],['Account Number','9876543210']] },
+  VCard:   { rows:[['V-Card / QR Number','+673 7XX XXXX']] },
+  Cash:    { info:'Place the exact amount in an S98 envelope. Drop-off location and timing will be confirmed via WhatsApp after ordering.' }
+};
 
-  let allAvailableProducts = [];
-  let activeCat = 'all';
+const PROOF_NAMES = ['Hafiz','Danial','Syafiq','Izzati','Farid','Amirah','Haziq','Nadhirah','Azri','Fatin','Rasyid','Liyana','Nizam','Arif'];
+const PROOF_ITEMS = ['Pokémon SV Booster','One Piece OP06 Box','Naruto Deck','Digimon BT14','DBZ Premium','Ultraman BP','Pokémon 151 ETB','One Piece Starter','Charizard ex','Naruto Box'];
+const PROOF_TIMES = ['just now','1 min ago','2 mins ago','3 mins ago','5 mins ago','8 mins ago','12 mins ago','20 mins ago'];
+const URGENCY     = ['🔥 Hot claim','👀 3 people viewing','⚡ Recently relisted','👀 2 people viewing','🔥 Popular item','⚡ Just restocked'];
 
-  async function loadHomepageData() {
-    await Promise.all([
-      loadLiveClaims(),
-      loadAvailableProducts(),
-      loadBackupItems(),
-      loadRecentlyClaimed(),
-    ]);
-  }
-
-  async function loadLiveClaims() {
-    const grid = document.getElementById('live-claims-grid');
-    try {
-      const { products } = await api.get('/products/live-claims');
-      grid.innerHTML = '';
-      if (!products.length) {
-        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">⚡</div><div class="empty-text">No active live claims right now.</div></div>';
-        return;
-      }
-      products.slice(0, 4).forEach(p => grid.appendChild(renderProductCard(p)));
-    } catch (e) {
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">Could not load live claims.</div>';
-    }
-  }
-
-  async function loadAvailableProducts() {
-    try {
-      const { products } = await api.get('/products?status=available');
-      const backup = await api.get('/products?status=backup');
-      allAvailableProducts = [...products, ...backup.products];
-      renderAvailableGrid();
-    } catch (e) {
-      document.getElementById('available-grid').innerHTML =
-        '<div class="empty-state" style="grid-column:1/-1">Could not load products.</div>';
-    }
-  }
-
-  function renderAvailableGrid() {
-    const grid = document.getElementById('available-grid');
-    grid.innerHTML = '';
-    const filtered = activeCat === 'all'
-      ? allAvailableProducts
-      : allAvailableProducts.filter(p => p.category === activeCat);
-
-    if (!filtered.length) {
-      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🃏</div><div class="empty-text">No items available in this category right now.</div></div>`;
-      return;
-    }
-    filtered.slice(0, 8).forEach(p => grid.appendChild(renderProductCard(p)));
-  }
-
-  async function loadBackupItems() {
-    const grid = document.getElementById('backup-grid');
-    try {
-      const { products } = await api.get('/products/back-up-for-claim');
-      grid.innerHTML = '';
-      if (!products.length) {
-        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🔄</div><div class="empty-text">No backup items right now.</div></div>';
-        return;
-      }
-      products.slice(0, 4).forEach(p => grid.appendChild(renderProductCard(p)));
-    } catch (e) {
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">Could not load backup items.</div>';
-    }
-  }
-
-  async function loadRecentlyClaimed() {
-    const grid = document.getElementById('sold-grid');
-    try {
-      const { products } = await api.get('/products/recently-claimed');
-      grid.innerHTML = '';
-      if (!products.length) {
-        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">✅</div><div class="empty-text">No sold items yet.</div></div>';
-        return;
-      }
-      products.slice(0, 4).forEach(p => grid.appendChild(renderProductCard(p, { showTimer: false })));
-    } catch (e) {
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">Could not load sold items.</div>';
-    }
-  }
-
-  // Category filter pills
-  document.getElementById('category-pills').addEventListener('click', e => {
-    const pill = e.target.closest('.pill');
-    if (!pill) return;
-    document.querySelectorAll('#category-pills .pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-    activeCat = pill.dataset.cat;
-    renderAvailableGrid();
+function buildTicker() {
+  const items = Array.from({length:14}, () => {
+    const n = PROOF_NAMES[Math.floor(Math.random()*PROOF_NAMES.length)];
+    const i = PROOF_ITEMS[Math.floor(Math.random()*PROOF_ITEMS.length)];
+    const t = PROOF_TIMES[Math.floor(Math.random()*PROOF_TIMES.length)];
+    return `<span class="ticker-item"><span class="ticker-dot"></span><strong>${n}</strong> claimed ${i}<span class="ticker-sep">·</span><span style="opacity:.6">${t}</span></span>`;
   });
+  const h = items.join('');
+  document.getElementById('tickerTrack').innerHTML = h + h;
+}
 
-  // Expose for modal success refresh
-  window.loadProducts = loadAvailableProducts;
+let allCards=[],viewCards=[],activeCat='ALL';
+let cart=JSON.parse(localStorage.getItem('kz_cart')||'[]'),lastOrder=null;
 
-  // Load all data
-  loadHomepageData();
+document.addEventListener('DOMContentLoaded',()=>{ buildTicker(); fetchCards(); syncCartUI(); });
 
-  // Auto-refresh every 30 seconds
-  setInterval(loadHomepageData, 30000);
+async function fetchCards(){
+  try{
+    const r=await fetch(`${API}/api/cards`);
+    if(!r.ok) throw new Error();
+    allCards=await r.json(); viewCards=allCards; renderFeed(allCards);
+  } catch {
+    document.getElementById('feed').innerHTML=`<div class="feed-empty"><p style="color:var(--red)">⚠️ Could not load products.</p></div>`;
+  }
+}
+
+function setCat(cat,btn){ activeCat=cat; document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active')); btn.classList.add('active'); filterCards(); }
+function filterCards(){
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  viewCards=allCards.filter(c=>{
+    const mC=activeCat==='ALL'||c.category===activeCat;
+    const mQ=!q||c.name.toLowerCase().includes(q)||(c.category||'').toLowerCase().includes(q);
+    return mC&&mQ;
+  });
+  renderFeed(viewCards);
+}
+
+function renderFeed(cards){
+  const skel=document.getElementById('skeletons');
+  if(skel) skel.remove();
+  const feed=document.getElementById('feed');
+  const cnt=document.getElementById('productCount');
+  const available=cards.filter(c=>c.stock>0);
+  const soldOut=cards.filter(c=>c.stock<=0);
+  cnt.textContent=available.length?`${available.length} available`:'None available';
+  if(!cards.length){ feed.innerHTML=`<div class="feed-empty"><span style="font-size:48px">🔍</span><p>No cards found.</p></div>`; return; }
+  feed.innerHTML=available.map(c=>buildCard(c,false)).join('')+(soldOut.length?soldOut.map(c=>buildCard(c,false)).join(''):'');
+  if(soldOut.length>0){
+    document.getElementById('backup-section').style.display='';
+    document.getElementById('backupFeed').innerHTML=soldOut.map(c=>buildCard(c,true)).join('');
+  }
+}
+
+function buildCard(c,isBackup){
+  const soldOut=c.stock<=0, inCart=cart.some(x=>x.id===c.id), low=!soldOut&&c.stock<=3;
+  let bc='badge-available',bt='AVAILABLE';
+  if(isBackup){bc='badge-relisted';bt='BACK UP FOR CLAIM';}
+  else if(soldOut){bc='badge-sold';bt='SOLD';}
+  else if(low){bt=`ONLY ${c.stock} LEFT`;}
+  const urg=(!soldOut&&!isBackup)?`<div class="urgency-tag"><span class="urgency-dot"></span>${URGENCY[Math.floor(Math.random()*URGENCY.length)]}</div>`:'';
+  const img=c.image?`<img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy">`:`<div class="ccard-img-placeholder"><span>🃏</span><p>${esc(c.category||'TCG')}</p></div>`;
+  let btn='';
+  if(isBackup||soldOut) btn=`<button class="btn-claim" disabled>Unavailable</button>`;
+  else if(inCart) btn=`<button class="btn-claim added" disabled>✓ In Bag</button>`;
+  else btn=`<button class="btn-claim" onclick="addItem(${c.id},'${esc(c.name)}',${c.price},'${esc(c.image||'')}',event)">Claim Now →</button>`;
+  return `<article class="ccard${soldOut&&!isBackup?' sold':''}">
+    <div class="ccard-img">${img}<span class="status-badge ${bc}">${bt}</span>${urg}</div>
+    <div class="ccard-body">
+      <div class="ccard-cat">${esc(c.category||'TCG')}</div>
+      <div class="ccard-name">${esc(c.name)}</div>
+      <div class="ccard-meta">
+        <span class="ccard-price">BND $${(+c.price).toFixed(2)}</span>
+        ${low?`<span class="ccard-stock stock-low">⚠ Only ${c.stock} left</span>`:`<span class="ccard-stock">${soldOut?'Out of stock':`${c.stock} in stock`}</span>`}
+      </div>
+      <div class="ccard-footer">
+        ${btn}
+        <a class="btn-wa-item" href="https://wa.me/${WA_NUMBER}?text=Hi%2C%20I'm%20interested%20in%20${encodeURIComponent(c.name)}" target="_blank" rel="noopener" title="Ask on WhatsApp">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+  </article>`;
+}
+
+function addItem(id,name,price,image,e){
+  e.stopPropagation();
+  if(cart.some(x=>x.id===id)){toast(`${name} already in bag`);return;}
+  cart.push({id,name,price:+price,image});
+  saveCart();syncCartUI();renderFeed(viewCards);toast(`✓ ${name} added`);
+}
+function removeItem(id){ cart=cart.filter(x=>x.id!==id); saveCart();syncCartUI();renderCartModal();renderFeed(viewCards); }
+function saveCart(){ localStorage.setItem('kz_cart',JSON.stringify(cart)); }
+function syncCartUI(){
+  const n=cart.length,badge=document.getElementById('hdrBadge'),fc=document.getElementById('floatCart'),fl=document.getElementById('floatLabel'),fb=document.getElementById('floatBadge');
+  if(n){ badge.textContent=n;badge.style.display='flex';fc.classList.remove('hidden');fl.textContent=`Claim Bag (${n})`;fb.textContent=n; }
+  else{ badge.style.display='none';fc.classList.add('hidden'); }
+}
+function renderCartModal(){
+  const body=document.getElementById('cartBody'),tot=cart.reduce((s,x)=>s+x.price,0);
+  document.getElementById('cartTot').textContent=`BND $${tot.toFixed(2)}`;
+  document.getElementById('btnCheckout').disabled=!cart.length;
+  if(!cart.length){body.innerHTML=`<div class="feed-empty" style="padding:30px 0"><span style="font-size:38px">🛒</span><p>Your bag is empty.</p></div>`;return;}
+  body.innerHTML=`<div class="cart-list">${cart.map(x=>`<div class="ci">${x.image?`<img src="${esc(x.image)}" class="ci-thumb" style="width:50px;height:50px;border-radius:7px;object-fit:cover">`:`<div class="ci-thumb">🃏</div>`}<div class="ci-info"><div class="ci-name">${esc(x.name)}</div><div class="ci-price">BND $${(+x.price).toFixed(2)}</div></div><button class="ci-del" onclick="removeItem(${x.id})">✕</button></div>`).join('')}</div>`;
+}
+function openCheckout(){
+  const tot=cart.reduce((s,x)=>s+x.price,0);
+  document.getElementById('osbItems').innerHTML=cart.map(x=>`<div class="osb-item"><span>${esc(x.name)}</span><span>BND $${(+x.price).toFixed(2)}</span></div>`).join('');
+  document.getElementById('osbTotal').textContent=`BND $${tot.toFixed(2)}`;
+  closeModal('cartOverlay');openModal('checkoutOverlay');
+}
+function refreshPayPanel(){
+  const method=document.getElementById('fPayment').value,panel=document.getElementById('payPanel');
+  if(!method){panel.innerHTML='';return;}
+  const d=PAYMENT[method];
+  let html=`<div class="pay-panel"><div class="pay-panel-title">💳 ${method} Payment Details</div>`;
+  if(d.rows) html+=d.rows.map(([l,v])=>{const isN=l.toLowerCase().includes('number')||l.toLowerCase().includes('v-card');return`<div class="pay-row"><span class="pr-label">${l}</span><span class="pr-val">${v}${isN?` <button class="btn-copy" onclick="doCopy('${v}',this)">Copy</button>`:''}</span></div>`;}).join('');
+  else if(d.info) html+=`<div class="pay-row"><span class="pr-val" style="font-size:13px;line-height:1.6;text-align:right;color:var(--ink-2)">${d.info}</span></div>`;
+  html+=`<div class="pay-note">⚠️ Transfer the exact amount and screenshot your payment — send via WhatsApp after claiming.</div></div>`;
+  panel.innerHTML=html;
+}
+async function placeOrder(){
+  const name=document.getElementById('fName').value.trim(),phone=document.getElementById('fPhone').value.trim(),pickup=document.getElementById('fPickup').value,payment=document.getElementById('fPayment').value,timing=document.getElementById('fTiming').value;
+  if(!name||!phone||!pickup||!payment||!timing){toast('⚠️ Please fill in all fields',true);return;}
+  if(!cart.length){toast('⚠️ Bag is empty',true);return;}
+  const total=cart.reduce((s,x)=>s+x.price,0);
+  try{
+    const r=await fetch(`${API}/api/orders`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({customer_name:name,phone,items:cart,total,pickup_location:pickup,payment_method:payment,drop_timing:timing})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'Order failed');
+    lastOrder={id:data.id,name,phone,items:[...cart],total,pickup,payment,timing};
+    cart=[];saveCart();syncCartUI();renderFeed(viewCards);
+    document.getElementById('oIdDisplay').textContent=`#${String(data.id).padStart(4,'0')}`;
+    closeModal('checkoutOverlay');openModal('successOverlay');
+  }catch(e){toast(`❌ ${e.message}`,true);}
+}
+function doWhatsApp(){
+  if(!lastOrder)return;
+  const{id,name,items,total,pickup,payment,timing}=lastOrder;
+  const oid=`#${String(id).padStart(4,'0')}`;
+  const list=items.map(i=>`  • ${i.name} — BND $${(+i.price).toFixed(2)}`).join('\n');
+  const msg=`🛒 *KOLLECTOZAM ORDER ${oid}*\n\n👤 *Customer:* ${name}\n📦 *Items:*\n${list}\n💰 *Total:* BND $${(+total).toFixed(2)}\n💳 *Payment:* ${payment}\n📍 *Pickup:* ${pickup}\n🕐 *Drop Timing:* ${timing}\n\n📸 _Payment screenshot attached._`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+function openModal(id){if(id==='cartOverlay')renderCartModal();document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal(o.id);}));
+function doCopy(text,btn){navigator.clipboard.writeText(text).then(()=>{const o=btn.textContent;btn.textContent='✓';btn.style.color='var(--green)';setTimeout(()=>{btn.textContent=o;btn.style.color='';},1600);});}
+function toast(msg,isErr=false){const c=document.getElementById('toasts'),t=document.createElement('div');t.className=`toast${isErr?' error':''}`;t.textContent=msg;c.prepend(t);setTimeout(()=>t.remove(),3200);}
+function esc(s){return String(s).replace(/[&<>"'`]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'}[c]));}
 </script>
 </body>
 </html>
