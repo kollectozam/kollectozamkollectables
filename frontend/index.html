@@ -15,7 +15,7 @@
 <body>
   <a class="skip-link" href="#catalogue">Skip to available items</a>
   <header class="site-header">
-    <a class="brand" href="/" aria-label="Kollectozam home"><img src="assets/img/logo-transparent.png" alt="Kollectozam"></a>
+    <a class="brand" href="/" aria-label="Kollectozam home"><span class="brand-mark" aria-hidden="true"><img src="assets/img/logo-transparent.png" alt=""></span><span class="brand-name">Kollectozam</span></a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       <a class="active" href="#catalogue">Available</a><a href="#how-to-claim">How to claim</a><a href="#contact">Contact</a>
     </nav>
@@ -28,11 +28,11 @@
     </section>
     <section class="catalogue" id="catalogue" aria-labelledby="catalogue-title">
       <div class="catalogue-topline">
-        <div><p class="section-kicker">Current inventory</p><h2 id="catalogue-title">Find your next pickup</h2></div>
+        <div><p class="section-kicker">Current inventory</p><h2 id="catalogue-title">Available cards</h2><p class="catalogue-intro">Only currently unclaimed items are shown.</p></div>
         <label class="search-box"><span class="sr-only">Search available items</span><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg><input id="searchInput" type="search" placeholder="Search items" autocomplete="off"></label>
       </div>
       <div class="filter-row" id="categoryFilters" aria-label="Filter by category"><button class="filter active" type="button" data-category="all" aria-pressed="true">All</button></div>
-      <div class="catalogue-status" id="catalogueStatus" role="status">Loading available items…</div>
+      <div class="catalogue-information"><div class="catalogue-status" id="catalogueStatus" role="status">Loading available items…</div><p class="inventory-updated" id="inventoryUpdated" hidden></p></div>
       <div class="product-grid" id="productGrid"></div>
     </section>
     <section class="how-to-claim" id="how-to-claim" aria-labelledby="claim-title">
@@ -50,8 +50,9 @@
   </main>
   <footer><img src="assets/img/logo-transparent.png" alt="Kollectozam"><p>Collectibles available in Brunei.</p><p>© <span id="currentYear"></span> Kollectozam Kollectables</p></footer>
   <template id="productCardTemplate">
-    <article class="product-card"><div class="product-image-wrap"><img class="product-image" alt="" loading="lazy"><span class="product-status">Available</span></div><div class="product-body"><div class="product-meta"><span class="product-category"></span><span class="product-reference"></span></div><h3 class="product-name"></h3><p class="product-details"></p><div class="product-action-row"><strong class="product-price"></strong><a class="product-claim" target="_blank" rel="noopener">Claim <span aria-hidden="true">→</span></a></div></div></article>
+    <article class="product-card"><div class="product-image-wrap"><button class="product-image-button" type="button"><img class="product-image" alt="" loading="lazy"><span class="image-expand">View larger</span></button><span class="product-status">Available</span></div><div class="product-body"><div class="product-meta"><span class="product-category"></span><span class="product-reference"></span></div><h3 class="product-name"></h3><dl class="product-specs"><div data-field="set"><dt>Set</dt><dd class="product-set"></dd></div><div data-field="number"><dt>Card no.</dt><dd class="product-number"></dd></div><div data-field="language"><dt>Language</dt><dd class="product-language"></dd></div><div data-field="condition"><dt>Condition</dt><dd class="product-condition"></dd></div></dl><p class="product-notes"></p><div class="product-action-row"><strong class="product-price"></strong><a class="product-claim" target="_blank" rel="noopener">Claim on WhatsApp <span aria-hidden="true">→</span></a></div></div></article>
   </template>
+  <dialog class="image-dialog" id="imageDialog" aria-labelledby="imageDialogTitle"><button class="dialog-close" id="dialogClose" type="button" aria-label="Close image">×</button><img id="dialogImage" alt=""><p id="imageDialogTitle"></p></dialog>
   <script src="assets/js/catalog.js" defer></script>
 </body>
 </html>
