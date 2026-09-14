@@ -4,12 +4,15 @@ Public availability catalogue for Kollectozam claim sales. Cloudflare Pages serv
 
 ## Inventory administration
 
-The production catalogue reads from `/api/products`. The private admin page at `/admin/` manages products in Cloudflare D1. Product photographs use direct HTTPS image URLs, so no object-storage service is required. Cloudflare Access must protect both `/admin/*` and `/api/admin/*`; server writes also require the verified Access email header.
+The production catalogue reads from `/api/products`. The private admin page at `/admin/` manages products in Cloudflare D1 and uploads product photographs into the GitHub repository. No object-storage service is required. Cloudflare Access must protect both `/admin/*` and `/api/admin/*`; server writes also require the verified Access email header.
 
 Required Cloudflare bindings:
 
 - D1 database binding: `DB`
 - Optional environment variable: `ADMIN_EMAILS` (comma-separated approved email addresses)
+- Secret: `GITHUB_TOKEN` (fine-grained token with Contents read/write permission for this repository only)
+- Optional environment variable: `GITHUB_REPOSITORY` (defaults to `kollectozam/kollectozamkollectables`)
+- Optional environment variable: `GITHUB_BRANCH` (defaults to `main`)
 
 Apply `migrations/0001_inventory.sql` to the production D1 database before using the admin page. See the deployment guidance supplied with this release for the dashboard sequence.
 

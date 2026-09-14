@@ -52,8 +52,8 @@
         <label>Price (BND)<input id="price" name="price" type="number" required min="0" step="0.01" inputmode="decimal" placeholder="45"></label>
         <label>Status<select id="productStatus" name="status"><option value="draft">Draft</option><option value="available">Available</option><option value="claimed">Claimed</option><option value="sold">Sold</option><option value="archived">Archived</option></select></label>
         <label class="wide">Condition notes<textarea id="notes" name="notes" maxlength="500" rows="3" placeholder="Describe corners, surface, centering or defects honestly."></textarea></label>
-        <label class="upload">Front photograph URL<input id="frontImageUrl" name="frontImageUrl" type="url" maxlength="1000" placeholder="https://example.com/card-front.jpg"><span class="file-help">Paste a direct HTTPS image address.</span><img id="frontPreview" class="preview" alt="Front preview" hidden></label>
-        <label class="upload">Back photograph URL<input id="backImageUrl" name="backImageUrl" type="url" maxlength="1000" placeholder="https://example.com/card-back.jpg"><span class="file-help">Optional direct HTTPS image address.</span><img id="backPreview" class="preview" alt="Back preview" hidden></label>
+        <label class="upload">Front photograph<input id="frontImage" type="file" accept="image/jpeg,image/png,image/webp"><span class="file-help">JPG, PNG or WebP · maximum 4 MB</span><img id="frontPreview" class="preview" alt="Front preview" hidden></label>
+        <label class="upload">Back photograph<input id="backImage" type="file" accept="image/jpeg,image/png,image/webp"><span class="file-help">Optional · maximum 4 MB</span><img id="backPreview" class="preview" alt="Back preview" hidden></label>
       </div>
       <p class="form-message" id="formMessage" role="status"></p>
       <div class="dialog-actions"><button type="button" class="secondary" id="cancelDialog">Cancel</button><button type="submit" class="primary" id="saveProduct">Save product</button></div>
