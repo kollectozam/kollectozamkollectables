@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS products (
   notes TEXT NOT NULL DEFAULT '',
   price REAL NOT NULL CHECK (price >= 0),
   status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','available','claimed','sold','archived')),
-  front_image_key TEXT,
-  back_image_key TEXT,
+  front_image_url TEXT,
+  back_image_url TEXT,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
