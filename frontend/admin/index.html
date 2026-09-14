@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#17171a">
+  <title>Inventory Admin — Kollectozam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+  <header class="admin-header">
+    <a class="brand" href="/"><img src="../assets/img/logo-transparent.png" alt=""><span>Kollectozam</span></a>
+    <div class="header-actions"><span id="adminIdentity" class="identity">Checking access…</span><a href="/" target="_blank" rel="noopener">View catalogue ↗</a></div>
+  </header>
+  <main>
+    <section class="page-heading">
+      <div><p class="kicker">Private workspace</p><h1>Inventory</h1><p>Add products, maintain prices and control what buyers can see.</p></div>
+      <button class="primary" id="addProduct" type="button">+ Add product</button>
+    </section>
+    <section class="metrics" aria-label="Inventory summary">
+      <article><span>Available</span><strong id="metricAvailable">—</strong></article>
+      <article><span>Claimed</span><strong id="metricClaimed">—</strong></article>
+      <article><span>Sold</span><strong id="metricSold">—</strong></article>
+      <article><span>Drafts</span><strong id="metricDraft">—</strong></article>
+    </section>
+    <section class="workspace">
+      <div class="toolbar">
+        <label class="search"><span class="sr-only">Search products</span><input id="adminSearch" type="search" placeholder="Search name, reference or set"></label>
+        <label><span class="sr-only">Filter by status</span><select id="statusFilter"><option value="all">All statuses</option><option value="available">Available</option><option value="claimed">Claimed</option><option value="sold">Sold</option><option value="draft">Draft</option><option value="archived">Archived</option></select></label>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Product</th><th>Reference</th><th>Status</th><th>Price</th><th>Updated</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="productRows"><tr><td colspan="6" class="loading">Loading inventory…</td></tr></tbody></table>
+      </div>
+    </section>
+  </main>
+  <dialog id="productDialog">
+    <form id="productForm">
+      <div class="dialog-heading"><div><p class="kicker">Inventory record</p><h2 id="formTitle">Add product</h2></div><button class="icon-button" type="button" id="closeDialog" aria-label="Close">×</button></div>
+      <input type="hidden" id="productId" name="id">
+      <div class="form-grid">
+        <label>Reference<input id="reference" name="reference" required maxlength="30" placeholder="KZ-001"></label>
+        <label>Product name<input id="name" name="name" required maxlength="120" placeholder="Jolteon ex SAR"></label>
+        <label>Category<input id="category" name="category" required maxlength="60" placeholder="Pokémon Singles"></label>
+        <label>Set<input id="setName" name="setName" maxlength="100" placeholder="Terastal Festival"></label>
+        <label>Card number<input id="cardNumber" name="cardNumber" maxlength="40" placeholder="209/187"></label>
+        <label>Language<select id="language" name="language"><option>English</option><option>Japanese</option><option>Chinese</option><option>Korean</option><option>Other</option></select></label>
+        <label>Condition<select id="condition" name="condition"><option>Near Mint</option><option>Lightly Played</option><option>Moderately Played</option><option>Heavily Played</option><option>Damaged</option><option>Sealed</option><option>Not applicable</option></select></label>
+        <label>Price (BND)<input id="price" name="price" type="number" required min="0" step="0.01" inputmode="decimal" placeholder="45"></label>
+        <label>Status<select id="productStatus" name="status"><option value="draft">Draft</option><option value="available">Available</option><option value="claimed">Claimed</option><option value="sold">Sold</option><option value="archived">Archived</option></select></label>
+        <label class="wide">Condition notes<textarea id="notes" name="notes" maxlength="500" rows="3" placeholder="Describe corners, surface, centering or defects honestly."></textarea></label>
+        <label class="upload">Front photograph<input id="frontImage" type="file" accept="image/jpeg,image/png,image/webp"><span class="file-help">JPG, PNG or WebP · maximum 4 MB</span><img id="frontPreview" class="preview" alt="Front preview" hidden></label>
+        <label class="upload">Back photograph<input id="backImage" type="file" accept="image/jpeg,image/png,image/webp"><span class="file-help">Optional · maximum 4 MB</span><img id="backPreview" class="preview" alt="Back preview" hidden></label>
+      </div>
+      <p class="form-message" id="formMessage" role="status"></p>
+      <div class="dialog-actions"><button type="button" class="secondary" id="cancelDialog">Cancel</button><button type="submit" class="primary" id="saveProduct">Save product</button></div>
+    </form>
+  </dialog>
+  <dialog id="archiveDialog" class="confirm-dialog"><div><h2>Archive this product?</h2><p>It will be removed from the public catalogue but retained in your inventory history.</p><div class="dialog-actions"><button class="secondary" id="cancelArchive" type="button">Cancel</button><button class="danger" id="confirmArchive" type="button">Archive product</button></div></div></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="../assets/js/admin.js" defer></script>
+</body>
+</html>
