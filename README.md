@@ -2,11 +2,25 @@
 
 Public availability catalogue for Kollectozam claim sales. Cloudflare Pages serves the contents of `frontend/`.
 
-## Add an available item
+## Inventory administration
+
+The production catalogue reads from `/api/products`. The private admin page at `/admin/` manages products in Cloudflare D1 and uploads photographs to R2. Cloudflare Access must protect both `/admin/*` and `/api/admin/*`; server writes also require the verified Access email header.
+
+Required Cloudflare bindings:
+
+- D1 database binding: `DB`
+- R2 bucket binding: `PRODUCT_IMAGES`
+- Optional environment variable: `ADMIN_EMAILS` (comma-separated approved email addresses)
+
+Apply `migrations/0001_inventory.sql` to the production D1 database before using the admin page. See the deployment guidance supplied with this release for the dashboard sequence.
+
+## Static fallback inventory
+
+If the API has not been configured, the public catalogue falls back to `frontend/data/products.json`. This keeps the public page operational during setup. To add an item through this temporary fallback:
 
 1. Add the product photograph under `frontend/assets/img/products/`.
 2. Update `lastUpdated`, then add one object to the `products` list in `frontend/data/products.json` using the structure below.
-3. Commit and push the change to `main`. Cloudflare Pages will publish it automatically.
+3. Commit and push the change. Cloudflare Pages will publish it automatically after merge.
 
 ```json
 {
