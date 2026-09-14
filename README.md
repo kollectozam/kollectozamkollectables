@@ -5,21 +5,28 @@ Public availability catalogue for Kollectozam claim sales. Cloudflare Pages serv
 ## Add an available item
 
 1. Add the product photograph under `frontend/assets/img/products/`.
-2. Add one object to `frontend/data/products.json` using the structure below.
+2. Update `lastUpdated`, then add one object to the `products` list in `frontend/data/products.json` using the structure below.
 3. Commit and push the change to `main`. Cloudflare Pages will publish it automatically.
 
 ```json
 {
-  "reference": "KZ-001",
-  "name": "Product name",
-  "category": "Pokemon",
-  "set": "Set name",
-  "language": "English",
-  "condition": "Near Mint",
-  "price": 45,
-  "image": "assets/img/products/kz-001.jpg",
-  "imageAlt": "Front photograph of Product name",
-  "status": "available"
+  "lastUpdated": "2026-09-14",
+  "products": [
+    {
+      "reference": "KZ-001",
+      "name": "Product name",
+      "category": "Pokemon",
+      "set": "Set name",
+      "cardNumber": "001/100",
+      "language": "English",
+      "condition": "Near Mint",
+      "notes": "Clean surface and corners.",
+      "price": 45,
+      "image": "assets/img/products/kz-001.jpg",
+      "imageAlt": "Front photograph of Product name",
+      "status": "available"
+    }
+  ]
 }
 ```
 
