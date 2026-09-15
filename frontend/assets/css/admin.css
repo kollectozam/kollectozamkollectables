@@ -76,6 +76,7 @@ th:nth-child(5),td:nth-child(5){display:none}
 }
 .header-button{padding:.6rem .8rem;border:1px solid #ffffff40;background:transparent;color:#fff}
 .login-panel{min-height:calc(100vh - 150px);display:grid;place-items:center}
+.login-panel[hidden],#adminWorkspace[hidden]{display:none}
 .login-card{width:min(430px,100%);padding:clamp(1.5rem,5vw,2.5rem);background:var(--surface);border:1px solid var(--line);box-shadow:0 18px 50px #17171a14}
 .login-card h1{font-size:clamp(2.7rem,8vw,4rem)}
 .login-card>p:not(.kicker):not(.form-message){color:var(--muted)}
