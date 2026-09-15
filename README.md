@@ -4,12 +4,14 @@ Public availability catalogue for Kollectozam claim sales. Cloudflare Pages serv
 
 ## Inventory administration
 
-The production catalogue reads from `/api/products`. The private admin page at `/admin/` manages products in Cloudflare D1 and uploads product photographs into the GitHub repository. No object-storage service is required. Cloudflare Access must protect both `/admin/*` and `/api/admin/*`; server writes also require the verified Access email header.
+The production catalogue reads from `/api/products`. The private admin page at `/admin/` manages products in Cloudflare D1 and uploads product photographs into the GitHub repository. No object-storage service or Cloudflare Zero Trust configuration is required.
+
+Set `ADMIN_PASSWORD` as an encrypted production secret in **Cloudflare Pages → Settings → Variables and Secrets**. The admin signs in with this password and receives a signed, secure, HTTP-only session cookie valid for seven days. Never commit the password to GitHub or add it to `wrangler.toml`.
 
 Required Cloudflare bindings:
 
 - D1 database binding: `DB`
-- Optional environment variable: `ADMIN_EMAILS` (comma-separated approved email addresses)
+- Secret: `ADMIN_PASSWORD` (unique password with at least 16 characters)
 - Secret: `GITHUB_TOKEN` (fine-grained token with Contents read/write permission for this repository only)
 - Optional environment variable: `GITHUB_REPOSITORY` (defaults to `kollectozam/kollectozamkollectables`)
 - Optional environment variable: `GITHUB_BRANCH` (defaults to `main`)
