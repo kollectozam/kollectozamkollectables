@@ -14,9 +14,20 @@
 <body>
   <header class="admin-header">
     <a class="brand" href="/"><img src="../assets/img/logo-transparent.png" alt=""><span>Kollectozam</span></a>
-    <div class="header-actions"><span id="adminIdentity" class="identity">Checking access…</span><a href="/" target="_blank" rel="noopener">View catalogue ↗</a></div>
+    <div class="header-actions"><span id="adminIdentity" class="identity">Sign in required</span><button id="logoutButton" class="header-button" type="button" hidden>Log out</button><a href="/" target="_blank" rel="noopener">View catalogue ↗</a></div>
   </header>
   <main>
+    <section id="loginPanel" class="login-panel">
+      <form id="loginForm" class="login-card">
+        <p class="kicker">Private workspace</p>
+        <h1>Admin sign in</h1>
+        <p>Enter your administrator password to manage the catalogue.</p>
+        <label>Password<input id="adminPassword" type="password" required autocomplete="current-password" autofocus></label>
+        <p id="loginMessage" class="form-message" role="alert"></p>
+        <button id="loginButton" class="primary" type="submit">Sign in</button>
+      </form>
+    </section>
+    <div id="adminWorkspace" hidden>
     <section class="page-heading">
       <div><p class="kicker">Private workspace</p><h1>Inventory</h1><p>Add products, maintain prices and control what buyers can see.</p></div>
       <button class="primary" id="addProduct" type="button">+ Add product</button>
@@ -36,6 +47,7 @@
         <table><thead><tr><th>Product</th><th>Reference</th><th>Status</th><th>Price</th><th>Updated</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="productRows"><tr><td colspan="6" class="loading">Loading inventory…</td></tr></tbody></table>
       </div>
     </section>
+    </div>
   </main>
   <dialog id="productDialog">
     <form id="productForm">
