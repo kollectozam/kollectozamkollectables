@@ -37,7 +37,10 @@
   const normaliseNumber = (value) => { const text = String(value ?? "").trim().toLowerCase(); return /^\d+$/.test(text) ? String(Number(text)) : text; };
   async function getJson(url, cache) {
     if (cache?.has(url)) return cache.get(url);
-    const promise = fetch(url).then((response) => { if (!response.ok) throw new Error(`Lookup failed (${response.status})`); return response.json(); });
+    const promise = fetch(url).then(async (response) => {
+      if (!response.ok) { const body = await response.json().catch(() => ({})); throw new Error(body.error || `Lookup failed (${response.status})`); }
+      return response.json();
+    });
     cache?.set(url, promise);
     try { return await promise; } catch (error) { cache?.delete(url); throw error; }
   }
@@ -87,9 +90,12 @@
   async function loadSets() {
     const { code } = languageParts();
     if (!code) return [];
-    const sets = await getJson(`${TCGDEX}/${code}/sets`, state.setsCache);
+    const sets = await getJson(setsUrl(code), state.setsCache);
     return Array.isArray(sets) ? sets : [];
   }
+  // Simplified Chinese comes from PikaQian via our server (keeps the API key secret); everything else from TCGdex.
+  const setsUrl = (code) => code === "zh-cn" ? "/api/admin/cn/sets" : `${TCGDEX}/${code}/sets`;
+  const setUrl = (code, id) => code === "zh-cn" ? `/api/admin/cn/sets/${encodeURIComponent(id)}` : `${TCGDEX}/${code}/sets/${encodeURIComponent(id)}`;
   function rememberedName(lang, setId) { return state.setNames.find((s) => s.lang === lang && s.setId === setId)?.displayName || ""; }
   // TCGdex only has native-language names for Asian sets; buyers know them by their English names.
   const ENGLISH_SET_NAMES = {
@@ -114,7 +120,7 @@
   // Name buyers see: what you saved before (unless it was just the native name), else the English name, else nothing.
   function displayName(lang, set) {
     const saved = rememberedName(lang, set.id);
-    return (saved && saved !== set.name ? saved : "") || (lang !== "en" && ENGLISH_SET_NAMES[set.id]) || "";
+    return (saved && saved !== set.name ? saved : "") || (lang !== "en" && (ENGLISH_SET_NAMES[set.id] || set.english)) || "";
   }
   async function showSetResults() {
     const query = els.setSearch.value.trim().toLowerCase(), { code } = languageParts();
@@ -122,7 +128,7 @@
     if (!code) { els.setResults.hidden = true; els.setStatus.textContent = "Card lookup isn't available for this language — type the set and card name yourself."; return; }
     let sets = [];
     try { sets = await loadSets(); els.setStatus.textContent = ""; }
-    catch { els.setStatus.textContent = "Card lookup is unavailable right now — you can still type the details yourself."; }
+    catch (error) { els.setStatus.textContent = `Card lookup is unavailable right now${code === "zh-cn" && error?.message ? ` (${error.message})` : ""} — you can still type the details yourself.`; }
     const remembered = new Set(state.setNames.filter((s) => s.lang === code).map((s) => s.setId));
     const matches = sets.slice().reverse()
       .map((s) => ({ ...s, display: displayName(code, s) }))
@@ -144,7 +150,7 @@
     els.setResults.hidden = true;
     els.setStatus.textContent = display ? "" : "First time using this set — edit the name buyers will see if needed. It's remembered after you submit.";
     saveSettings();
-    getJson(`${TCGDEX}/${code}/sets/${encodeURIComponent(set.id)}`, state.setCache).catch(() => {}); // warm the cache
+    getJson(setUrl(code, set.id), state.setCache).catch(() => {}); // warm the cache
     if (els.number.value.trim()) lookupCard();
   }
 
@@ -156,7 +162,7 @@
     return /^[A-Z]{1,4}$/.test(text) ? text : "";
   }
   async function englishName(card, lang) {
-    if (lang === "en") return card.name;
+    if (lang === "en" || lang === "id" || lang === "zh-cn") return card.name; // Indonesian prints use English names; PikaQian supplies English names
     const dexId = Array.isArray(card.dexId) ? card.dexId[0] : null;
     if (!dexId) return "";
     const species = await getJson(`${POKEAPI}/pokemon-species/${dexId}`, state.speciesCache);
@@ -174,11 +180,11 @@
     if (!state.set || state.set.lang !== languageParts().code) { els.lookupStatus.textContent = "Pick a set above to fill in the name automatically."; return; }
     els.lookupStatus.textContent = "Looking up…";
     try {
-      const set = await getJson(`${TCGDEX}/${state.set.lang}/sets/${encodeURIComponent(state.set.id)}`, state.setCache);
+      const set = await getJson(setUrl(state.set.lang, state.set.id), state.setCache);
       if (token !== state.lookupToken) return;
       const brief = (set.cards || []).find((c) => normaliseNumber(c.localId) === normaliseNumber(key));
       if (!brief) { els.lookupStatus.textContent = `No card ${key} in ${state.set.label} — type the name yourself.`; return; }
-      const card = await getJson(`${TCGDEX}/${state.set.lang}/cards/${encodeURIComponent(brief.id)}`, state.cardCache).catch(() => brief);
+      const card = state.set.lang === "zh-cn" ? brief : await getJson(`${TCGDEX}/${state.set.lang}/cards/${encodeURIComponent(brief.id)}`, state.cardCache).catch(() => brief);
       if (token !== state.lookupToken) return;
       const english = await englishName(card, state.set.lang).catch(() => "");
       if (token !== state.lookupToken) return;
@@ -190,7 +196,8 @@
         els.number.value = `${local}/${String(set.cardCount.official).padStart(/^0\d/.test(local) ? local.length : 0, "0")}`;
       }
       els.lookupStatus.textContent = `Found: ${[english && english !== card.name ? `${english} (${card.name})` : card.name, card.rarity].filter(Boolean).join(" · ")}`;
-      if (card.image || brief.image) { els.lookupImage.src = `${card.image || brief.image}/low.webp`; els.lookupImage.hidden = false; }
+      const picture = card.imageUrl || ((card.image || brief.image) && `${card.image || brief.image}/low.webp`);
+      if (picture) { els.lookupImage.src = picture; els.lookupImage.hidden = false; }
       if (!els.price.value) els.price.focus();
     } catch (error) {
       if (token === state.lookupToken) els.lookupStatus.textContent = "Lookup failed — type the name yourself.";

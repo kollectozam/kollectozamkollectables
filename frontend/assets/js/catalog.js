@@ -3,7 +3,7 @@ const state={items:[],set:"all",query:"",sort:"newest",lastUpdated:"",signature:
 const grid=document.getElementById("productGrid"),status=document.getElementById("catalogueStatus"),count=document.getElementById("availableCount"),filters=document.getElementById("setFilters"),search=document.getElementById("searchInput"),sortSelect=document.getElementById("sortSelect"),template=document.getElementById("productCardTemplate"),updated=document.getElementById("inventoryUpdated"),dialog=document.getElementById("imageDialog"),dialogImage=document.getElementById("dialogImage"),dialogTitle=document.getElementById("imageDialogTitle"),dialogFront=document.getElementById("dialogFront"),dialogBack=document.getElementById("dialogBack");
 document.getElementById("currentYear").textContent=new Date().getFullYear();
 const normalise=(value)=>String(value??"").trim().toLowerCase();
-const LANGUAGE_CODES={english:"EN",japanese:"JP",chinese:"CN",korean:"KR"};
+const LANGUAGE_CODES={english:"EN",japanese:"JP",chinese:"CN",korean:"KR",indonesian:"ID"};
 function formatPrice(value){const amount=new Intl.NumberFormat("en-BN",{minimumFractionDigits:Number(value)%1===0?0:2,maximumFractionDigits:2}).format(Number(value));return `BND $${amount}`}
 function formatUpdated(value){if(!value)return "";const date=new Date(value);if(Number.isNaN(date.getTime()))return value;return new Intl.DateTimeFormat("en-BN",{day:"numeric",month:"long",year:"numeric",timeZone:"Asia/Brunei"}).format(date)}
 const setLine=(item)=>[item.set,item.cardNumber].filter(Boolean).join(" · ");
