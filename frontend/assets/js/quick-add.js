@@ -156,7 +156,7 @@
     return /^[A-Z]{1,4}$/.test(text) ? text : "";
   }
   async function englishName(card, lang) {
-    if (lang === "en") return card.name;
+    if (lang === "en" || lang === "id") return card.name; // Indonesian prints use the English names
     const dexId = Array.isArray(card.dexId) ? card.dexId[0] : null;
     if (!dexId) return "";
     const species = await getJson(`${POKEAPI}/pokemon-species/${dexId}`, state.speciesCache);
