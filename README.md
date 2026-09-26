@@ -18,6 +18,19 @@ Required Cloudflare bindings:
 
 Apply `migrations/0001_inventory.sql` to the production D1 database before using the admin page. See the deployment guidance supplied with this release for the dashboard sequence.
 
+`migrations/0003_quick_add.sql` (listing quantity and remembered set names) is applied automatically by the API on first use; running it manually is optional.
+
+## Quick add on a phone
+
+Open `/admin/` on your phone, sign in and tap **Quick add cards**:
+
+1. Choose the language, condition and set once. They stay selected for the following cards.
+2. Take the front photo (the back is optional) and type the card number. The name, rarity and full number are filled in from [TCGdex](https://tcgdex.dev); for non-English cards the English Pokémon name comes from [PokeAPI](https://pokeapi.co).
+3. Enter the price and quantity, then **Add to batch**. The batch is saved on the phone until it is submitted.
+4. Tap **Submit** to publish (or save as drafts). Cards are sent in groups of eight, each group as one GitHub commit.
+
+The first time you use a set, confirm the set name buyers will see; it is remembered for next time. Item references (`KZ-001`, …) are generated automatically and are not shown to buyers.
+
 ## Static fallback inventory
 
 If the API has not been configured, the public catalogue falls back to `frontend/data/products.json`. This keeps the public page operational during setup. To add an item through this temporary fallback:
@@ -50,6 +63,6 @@ If the API has not been configured, the public catalogue falls back to `frontend
 
 Only items with `"status": "available"` appear publicly. Change the status to `"claimed"` to remove an item while retaining its record.
 
-Use sequential references such as `KZ-001`, `KZ-002`, and `KZ-003`. Never reuse a reference for another item.
+In the fallback file, use sequential references such as `KZ-001`, `KZ-002`, and `KZ-003`. Never reuse a reference for another item. (The admin page generates these automatically.)
 
 Use clear photographs of the actual item, preferably cropped to 4:3. Keep each JPG or WebP below 1 MB where practical. Never commit customer information, payment details, access tokens or private claim records.

@@ -30,7 +30,7 @@
     <div id="adminWorkspace" hidden>
     <section class="page-heading">
       <div><p class="kicker">Private workspace</p><h1>Inventory</h1><p>Add products, maintain prices and control what buyers can see.</p></div>
-      <button class="primary" id="addProduct" type="button">+ Add product</button>
+      <div class="heading-actions"><button class="secondary" id="addProduct" type="button">+ Single product</button><button class="primary" id="quickAdd" type="button">Quick add cards</button></div>
     </section>
     <section class="metrics" aria-label="Inventory summary">
       <article><span>Available</span><strong id="metricAvailable">—</strong></article>
@@ -40,11 +40,12 @@
     </section>
     <section class="workspace">
       <div class="toolbar">
-        <label class="search"><span class="sr-only">Search products</span><input id="adminSearch" type="search" placeholder="Search name, reference or set"></label>
+        <label class="search"><span class="sr-only">Search products</span><input id="adminSearch" type="search" placeholder="Search name, set or number"></label>
+        <div class="bulk-bar" id="bulkBar" hidden><span id="bulkCount">0 selected</span><label><span class="sr-only">New status</span><select id="bulkStatus"><option value="available">Mark available</option><option value="claimed">Mark claimed</option><option value="sold">Mark sold</option><option value="draft">Move to drafts</option><option value="archived">Archive</option></select></label><button type="button" class="primary" id="bulkApply">Apply</button><button type="button" class="secondary" id="bulkClear">Clear</button></div>
         <label><span class="sr-only">Filter by status</span><select id="statusFilter"><option value="all">All statuses</option><option value="available">Available</option><option value="claimed">Claimed</option><option value="sold">Sold</option><option value="draft">Draft</option><option value="archived">Archived</option></select></label>
       </div>
       <div class="table-wrap">
-        <table><thead><tr><th>Product</th><th>Reference</th><th>Status</th><th>Price</th><th>Updated</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="productRows"><tr><td colspan="6" class="loading">Loading inventory…</td></tr></tbody></table>
+        <table><thead><tr><th class="check-cell"><input type="checkbox" id="selectAll" aria-label="Select all visible products"></th><th>Product</th><th>Status</th><th>Price</th><th>Updated</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="productRows"><tr><td colspan="6" class="loading">Loading inventory…</td></tr></tbody></table>
       </div>
     </section>
     </div>
@@ -54,25 +55,63 @@
       <div class="dialog-heading"><div><p class="kicker">Inventory record</p><h2 id="formTitle">Add product</h2></div><button class="icon-button" type="button" id="closeDialog" aria-label="Close">×</button></div>
       <input type="hidden" id="productId" name="id">
       <div class="form-grid">
-        <label>Reference<input id="reference" name="reference" required maxlength="30" placeholder="KZ-001"></label>
-        <label>Product name<input id="name" name="name" required maxlength="120" placeholder="Jolteon ex SAR"></label>
+                <label>Product name<input id="name" name="name" required maxlength="120" placeholder="Jolteon ex SAR"></label>
         <label>Category<input id="category" name="category" required maxlength="60" placeholder="Pokémon Singles"></label>
         <label>Set<input id="setName" name="setName" maxlength="100" placeholder="Terastal Festival"></label>
         <label>Card number<input id="cardNumber" name="cardNumber" maxlength="40" placeholder="209/187"></label>
         <label>Language<select id="language" name="language"><option>English</option><option>Japanese</option><option>Chinese</option><option>Korean</option><option>Other</option></select></label>
         <label>Condition<select id="condition" name="condition"><option>Near Mint</option><option>Lightly Played</option><option>Moderately Played</option><option>Heavily Played</option><option>Damaged</option><option>Sealed</option><option>Not applicable</option></select></label>
         <label>Price (BND)<input id="price" name="price" type="number" required min="0" step="0.01" inputmode="decimal" placeholder="45"></label>
+        <label>Quantity<input id="quantity" name="quantity" type="number" required min="1" max="99" step="1" inputmode="numeric" value="1"></label>
         <label>Status<select id="productStatus" name="status"><option value="draft">Draft</option><option value="available">Available</option><option value="claimed">Claimed</option><option value="sold">Sold</option><option value="archived">Archived</option></select></label>
         <label class="wide">Condition notes<textarea id="notes" name="notes" maxlength="500" rows="3" placeholder="Describe corners, surface, centering or defects honestly."></textarea></label>
-        <label class="upload">Front photograph<input id="frontImage" type="file" accept="image/jpeg,image/png,image/webp"><span class="file-help">Portrait, straight-on and fully visible · maximum 4 MB</span><img id="frontPreview" class="preview" alt="Front preview" hidden></label>
-        <label class="upload">Back photograph<input id="backImage" type="file" accept="image/jpeg,image/png,image/webp"><span class="file-help">Use the same framing as the front · optional, maximum 4 MB</span><img id="backPreview" class="preview" alt="Back preview" hidden></label>
+        <label class="upload">Front photograph<input id="frontImage" type="file" accept="image/jpeg,image/png,image/webp"><span class="file-help">Portrait, straight-on and fully visible · resized automatically</span><img id="frontPreview" class="preview" alt="Front preview" hidden></label>
+        <label class="upload">Back photograph<input id="backImage" type="file" accept="image/jpeg,image/png,image/webp"><span class="file-help">Use the same framing as the front · optional</span><img id="backPreview" class="preview" alt="Back preview" hidden></label>
       </div>
       <p class="form-message" id="formMessage" role="status"></p>
       <div class="dialog-actions"><button type="button" class="secondary" id="cancelDialog">Cancel</button><button type="submit" class="primary" id="saveProduct">Save product</button></div>
     </form>
   </dialog>
   <dialog id="archiveDialog" class="confirm-dialog"><div><h2>Archive this product?</h2><p>It will be removed from the public catalogue but retained in your inventory history.</p><div class="dialog-actions"><button class="secondary" id="cancelArchive" type="button">Cancel</button><button class="danger" id="confirmArchive" type="button">Archive product</button></div></div></dialog>
+  <dialog id="quickDialog" class="quick-dialog" aria-labelledby="qaTitle">
+    <div class="quick-shell">
+      <header class="quick-header"><div><p class="kicker">Quick add</p><h2 id="qaTitle">Add cards</h2></div><button class="icon-button" type="button" id="qaClose" aria-label="Close">×</button></header>
+      <section class="quick-setup" aria-label="Batch settings">
+        <div class="quick-row">
+          <label>Language<select id="qaLanguage"><option value="English|en">English</option><option value="Japanese|ja">Japanese</option><option value="Chinese|zh-tw">Chinese (Traditional)</option><option value="Chinese|">Chinese (Simplified)</option><option value="Korean|">Korean</option><option value="Other|">Other</option></select></label>
+          <label>Condition<select id="qaCondition"><option>Near Mint</option><option>Lightly Played</option><option>Moderately Played</option><option>Heavily Played</option><option>Damaged</option><option>Sealed</option><option>Not applicable</option></select></label>
+        </div>
+        <div class="set-picker"><label>Set<input id="qaSetSearch" type="search" autocomplete="off" placeholder="Search sets, e.g. Mega Dream"></label><ul id="qaSetResults" class="set-results" hidden></ul></div>
+        <label>Set name buyers see<input id="qaSetName" maxlength="100" placeholder="Mega Dream EX"></label>
+        <p id="qaSetStatus" class="quick-hint"></p>
+      </section>
+      <form id="qaForm" class="quick-card" novalidate>
+        <div class="photo-row">
+          <label class="photo-slot"><input id="qaFront" type="file" accept="image/*" capture="environment"><img id="qaFrontPreview" alt="Front photo" hidden><span>📷 Front photo</span></label>
+          <label class="photo-slot back"><input id="qaBack" type="file" accept="image/*" capture="environment"><img id="qaBackPreview" alt="Back photo" hidden><span>Back<br><small>optional</small></span></label>
+        </div>
+        <div class="quick-row">
+          <label>Card no.<input id="qaNumber" autocomplete="off" autocapitalize="characters" enterkeyhint="search" placeholder="196"></label>
+          <label>Quantity<input id="qaQuantity" type="number" min="1" max="99" step="1" inputmode="numeric" value="1"></label>
+        </div>
+        <div class="lookup-line"><img id="qaLookupImage" alt="" hidden><p id="qaLookupStatus" class="quick-hint" role="status"></p></div>
+        <label>Card name<input id="qaName" maxlength="120" autocomplete="off" placeholder="Filled in from the card number"></label>
+        <label>Price (BND)<input id="qaPrice" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0"></label>
+        <p id="qaFormMessage" class="form-message" role="alert"></p>
+        <button class="primary" id="qaAddButton" type="submit">Add to batch</button>
+      </form>
+      <section class="quick-batch" aria-labelledby="qaBatchTitle">
+        <h3 id="qaBatchTitle">Batch <span id="qaBatchCount">0</span></h3>
+        <ul id="qaBatchList" class="batch-list"></ul>
+      </section>
+      <footer class="quick-footer">
+        <p id="qaSubmitMessage" class="form-message" role="status"></p>
+        <div class="quick-footer-row"><label><span class="sr-only">Submit as</span><select id="qaSubmitStatus"><option value="available">Publish now</option><option value="draft">Save as drafts</option></select></label><button class="primary" id="qaSubmit" type="button" disabled>Submit</button></div>
+      </footer>
+    </div>
+  </dialog>
   <div class="toast" id="toast" role="status" hidden></div>
   <script src="../assets/js/admin.js" defer></script>
+  <script src="../assets/js/quick-add.js" defer></script>
 </body>
 </html>
