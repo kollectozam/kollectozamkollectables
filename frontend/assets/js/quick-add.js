@@ -91,6 +91,31 @@
     return Array.isArray(sets) ? sets : [];
   }
   function rememberedName(lang, setId) { return state.setNames.find((s) => s.lang === lang && s.setId === setId)?.displayName || ""; }
+  // TCGdex only has native-language names for Asian sets; buyers know them by their English names.
+  const ENGLISH_SET_NAMES = {
+    "SV-P": "Scarlet & Violet Promos", SV1S: "Scarlet ex", SV1V: "Violet ex", SV1a: "Triplet Beat", SV2D: "Clay Burst", SV2P: "Snow Hazard",
+    SV2a: "Pokémon Card 151", SV3: "Ruler of the Black Flame", SV3a: "Raging Surf", SV4K: "Ancient Roar", SV4M: "Future Flash",
+    SV4a: "Shiny Treasure ex", SV5K: "Wild Force", SV5M: "Cyber Judge", SV5a: "Crimson Haze", SV6: "Mask of Change", SV6a: "Night Wanderer",
+    SV7: "Stellar Miracle", SV7a: "Paradise Dragona", SV8: "Super Electric Breaker", SV8a: "Terastal Festival ex", SV9: "Battle Partners",
+    SV9a: "Heat Wave Arena", SV10: "Glory of Team Rocket", SV11B: "Black Bolt", SV11W: "White Flare", SVK: "Stellar Miracle Deck Build Box",
+    "M-P": "Mega Promos", M1L: "Mega Brave", M1S: "Mega Symphonia", M2: "Inferno X", M2a: "Mega Dream EX", M3: "Munikis Zero",
+    M4: "Ninja Spinner", M5: "Abyss Eye", M6: "Storm Emeralda", M6a: "30th Celebration",
+    S1W: "Sword", S1H: "Shield", S1a: "VMAX Rising", S2: "Rebellion Crash", S2a: "Explosive Walker", S3: "Infinity Zone",
+    S3a: "Legendary Heartbeat", S4: "Amazing Volt Tackle", S4a: "Shiny Star V", S5I: "Single Strike Master", S5R: "Rapid Strike Master",
+    S5a: "Matchless Fighters", S6H: "Silver Lance", S6K: "Jet-Black Spirit", S6a: "Eevee Heroes", S7D: "Skyscraping Perfection",
+    S7R: "Blue Sky Stream", S8: "Fusion Arts", S8a: "25th Anniversary Collection", S8b: "VMAX Climax", S9: "Star Birth", S9a: "Battle Region",
+    S10D: "Time Gazer", S10P: "Space Juggler", S10a: "Dark Phantasma", S10b: "Pokémon GO", S11: "Lost Abyss", S11a: "Incandescent Arcana",
+    S12: "Paradigm Trigger", S12a: "VSTAR Universe",
+    SM6: "Forbidden Light", SM6a: "Dragon Storm", SM6b: "Champion Road", SM7: "Charisma of the Wrecked Sky", SM7a: "Thunderclap Spark",
+    SM7b: "Fairy Rise", SM8: "Super-Burst Impact", SM8a: "Dark Order", SM8b: "GX Ultra Shiny", SM9: "Tag Bolt", SM9a: "Night Unison",
+    SM9b: "Full Metal Wall", SM10: "Double Blaze", SM10a: "GG End", SM10b: "Sky Legend", SM11: "Miracle Twin", SM11a: "Remix Bout",
+    SM11b: "Dream League", SM12: "Alter Genesis", SM12a: "Tag All Stars", SMP2: "Detective Pikachu"
+  };
+  // Name buyers see: what you saved before (unless it was just the native name), else the English name, else nothing.
+  function displayName(lang, set) {
+    const saved = rememberedName(lang, set.id);
+    return (saved && saved !== set.name ? saved : "") || (lang !== "en" && ENGLISH_SET_NAMES[set.id]) || "";
+  }
   async function showSetResults() {
     const query = els.setSearch.value.trim().toLowerCase(), { code } = languageParts();
     els.setResults.innerHTML = "";
@@ -100,7 +125,7 @@
     catch { els.setStatus.textContent = "Card lookup is unavailable right now — you can still type the details yourself."; }
     const remembered = new Set(state.setNames.filter((s) => s.lang === code).map((s) => s.setId));
     const matches = sets.slice().reverse()
-      .map((s) => ({ ...s, display: rememberedName(code, s.id) }))
+      .map((s) => ({ ...s, display: displayName(code, s) }))
       .filter((s) => !query || [s.name, s.id, s.display].join(" ").toLowerCase().includes(query))
       .sort((a, b) => Number(remembered.has(b.id)) - Number(remembered.has(a.id)))
       .slice(0, 40);
@@ -112,7 +137,7 @@
     clearTimeout(setTimer);
     const { code } = languageParts(), sets = await loadSets().catch(() => []), set = sets.find((s) => s.id === setId);
     if (!set) return;
-    const display = rememberedName(code, set.id);
+    const display = displayName(code, set);
     state.set = { lang: code, id: set.id, name: set.name, label: display || set.name };
     els.setSearch.value = state.set.label;
     els.setName.value = display || set.name;
