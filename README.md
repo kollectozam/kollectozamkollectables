@@ -13,12 +13,13 @@ Required Cloudflare bindings:
 - D1 database binding: `DB`
 - Secret: `ADMIN_PASSWORD` (unique password with at least 16 characters)
 - Secret: `GITHUB_TOKEN` (fine-grained token with Contents read/write permission for this repository only)
+- Secret: `PIKAQIAN_API_KEY` (optional; enables Simplified Chinese card lookup in quick add. Set and card lists are cached in D1 — sets for 7 days, card lists for 30 days — to stay within the free 500 requests/month)
 - Optional environment variable: `GITHUB_REPOSITORY` (defaults to `kollectozam/kollectozamkollectables`)
 - Optional environment variable: `GITHUB_BRANCH` (defaults to `main`)
 
 Apply `migrations/0001_inventory.sql` to the production D1 database before using the admin page. See the deployment guidance supplied with this release for the dashboard sequence.
 
-`migrations/0003_quick_add.sql` (listing quantity and remembered set names) is applied automatically by the API on first use; running it manually is optional.
+`migrations/0003_quick_add.sql` (listing quantity and remembered set names) is applied automatically by the API on first use; running it manually is optional. The same applies to `migrations/0004_lookup_cache.sql`.
 
 ## Quick add on a phone
 
