@@ -6,6 +6,8 @@ Public availability catalogue for Kollectozam claim sales. Cloudflare Pages serv
 
 The production catalogue reads from `/api/products`. The private admin page at `/admin/` manages products in Cloudflare D1 and uploads product photographs into the GitHub repository. No object-storage service or Cloudflare Zero Trust configuration is required.
 
+Each product also has a shareable `/p/{reference}` page, such as `/p/KZ-001`. It reads the current D1 record and supplies card-specific Open Graph metadata so WhatsApp can show the photograph, name and price in the link preview.
+
 Set `ADMIN_PASSWORD` as an encrypted production secret in **Cloudflare Pages → Settings → Variables and Secrets**. The admin signs in with this password and receives a signed, secure, HTTP-only session cookie valid for seven days. Never commit the password to GitHub or add it to `wrangler.toml`.
 
 Required Cloudflare bindings:
