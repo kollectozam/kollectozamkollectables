@@ -42,7 +42,7 @@ th{color:var(--muted);font-size:.7rem;letter-spacing:.08em;text-transform:upperc
 .status.claimed{background:#fff0d9;color:var(--amber)}
 .status.sold{background:#eee;color:#555}
 .row-actions{display:flex;justify-content:flex-end;gap:.4rem}
-.row-actions button{padding:.45rem .65rem;background:#fff;border:1px solid var(--line);font-size:.75rem}
+.row-actions button,.row-actions a{padding:.45rem .65rem;background:#fff;border:1px solid var(--line);color:var(--ink);font-size:.75rem;text-decoration:none;white-space:nowrap}.row-actions a{border-color:#c9addf;color:var(--purple);font-weight:700}
 .loading{text-align:center;color:var(--muted);padding:3rem}
 dialog{width:min(760px,calc(100% - 1.25rem));max-height:92vh;padding:0;border:0;box-shadow:0 20px 80px #0004}
 dialog::backdrop{background:#111a;backdrop-filter:blur(3px)}
