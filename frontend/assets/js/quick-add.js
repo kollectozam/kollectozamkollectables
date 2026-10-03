@@ -1,5 +1,5 @@
-// Quick add: photograph cards on a phone, look up details from TCGdex (with a server-side TCGGO
-// fallback for Japanese M6a, plus PokeAPI for English names),
+// Quick add: photograph cards on a phone, look up details from TCGdex (with bundled TCGdex data
+// for Japanese M6a, plus PokeAPI for English names),
 // collect them in a batch saved on the device, then submit in chunks (one GitHub commit per chunk).
 (() => {
   const TCGDEX = "https://api.tcgdex.net/v2";
@@ -95,13 +95,16 @@
     const result = await getJson(setsUrl(code), state.setsCache);
     const sets = Array.isArray(result) ? result.slice() : [];
     // TCGdex has merged M6a upstream but its live Japanese endpoint does not list it yet.
-    // Keep the fallback local to this one set so normal Japanese lookups continue using TCGdex.
-    if (code === "ja" && !sets.some((set) => String(set.id).toLowerCase() === "m6a")) {
-      sets.push({
+    // Keep a bundled index for this one set so normal Japanese lookups continue using the API.
+    if (code === "ja") {
+      const bundled = {
         id: "M6a", name: "30th Celebration (Japanese)", english: "30th Celebration",
         aliases: ["30th Anniversary", "30th Celebration", "M6a"],
-        cardCount: { official: 103, total: 175 }, provider: "tcggo"
-      });
+        cardCount: { official: 103, total: 176 }, provider: "bundled"
+      };
+      const existing = sets.findIndex((set) => String(set.id).toLowerCase() === "m6a");
+      if (existing < 0) sets.push(bundled);
+      else sets[existing] = { ...sets[existing], ...bundled };
     }
     return sets;
   }
@@ -111,7 +114,7 @@
   const setUrl = (code, id) => code === "zh-cn"
     ? `/api/admin/cn/sets/${encodeURIComponent(id)}`
     : isJapaneseM6a(code, id)
-      ? "/api/admin/tcggo/sets/M6a"
+      ? "/data/m6a.json"
       : `${TCGDEX}/${code}/sets/${encodeURIComponent(id)}`;
   function rememberedName(lang, setId) { return state.setNames.find((s) => s.lang === lang && s.setId === setId)?.displayName || ""; }
   // TCGdex only has native-language names for Asian sets; buyers know them by their English names.
@@ -165,8 +168,8 @@
     els.setSearch.value = state.set.label;
     els.setName.value = display || set.name;
     els.setResults.hidden = true;
-    els.setStatus.textContent = set.provider === "tcggo"
-      ? "Japanese 30th Celebration lookup uses TCGGO while TCGdex completes its live M6a data."
+    els.setStatus.textContent = set.provider === "bundled"
+      ? "Japanese 30th Celebration is ready for card-number lookup."
       : display ? "" : "First time using this set — edit the name buyers will see if needed. It's remembered after you submit.";
     saveSettings();
     getJson(setUrl(code, set.id), state.setCache).catch(() => {}); // warm the cache
@@ -204,7 +207,7 @@
       if (token !== state.lookupToken) return;
       const brief = (set.cards || []).find((c) => normaliseNumber(c.localId) === normaliseNumber(key));
       if (!brief) { els.lookupStatus.textContent = `No card ${key} in ${state.set.label} — type the name yourself.`; return; }
-      const card = state.set.lang === "zh-cn" || state.set.provider === "tcggo"
+      const card = state.set.lang === "zh-cn" || state.set.provider === "bundled"
         ? brief
         : await getJson(`${TCGDEX}/${state.set.lang}/cards/${encodeURIComponent(brief.id)}`, state.cardCache).catch(() => brief);
       if (token !== state.lookupToken) return;
