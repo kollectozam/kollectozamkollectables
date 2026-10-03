@@ -1,0 +1,1575 @@
+{
+  "id": "M6a",
+  "name": "30th Celebration (Japanese)",
+  "english": "30th Celebration",
+  "provider": "bundled",
+  "source": "TCGdex cards-database",
+  "sourceCommit": "c5c0a8a63fe81746d05b9c95e8f51ed6931f7e78",
+  "cardCount": {
+    "official": 103,
+    "total": 176
+  },
+  "cards": [
+    {
+      "id": "m6a-001",
+      "localId": "001",
+      "name": "タマタマ",
+      "rarity": "None",
+      "dexId": [
+        102
+      ]
+    },
+    {
+      "id": "m6a-002",
+      "localId": "002",
+      "name": "アローラ ナッシー",
+      "rarity": "None",
+      "dexId": [
+        103
+      ]
+    },
+    {
+      "id": "m6a-003",
+      "localId": "003",
+      "name": "バルビート",
+      "rarity": "None",
+      "dexId": [
+        313
+      ]
+    },
+    {
+      "id": "m6a-004",
+      "localId": "004",
+      "name": "イルミーゼ",
+      "rarity": "None",
+      "dexId": [
+        314
+      ]
+    },
+    {
+      "id": "m6a-005",
+      "localId": "005",
+      "name": "ビビヨン",
+      "rarity": "None",
+      "dexId": [
+        666
+      ]
+    },
+    {
+      "id": "m6a-006",
+      "localId": "006",
+      "name": "ファイヤー",
+      "rarity": "None",
+      "dexId": [
+        146
+      ]
+    },
+    {
+      "id": "m6a-007",
+      "localId": "007",
+      "name": "ホウオウ",
+      "rarity": "None",
+      "dexId": [
+        250
+      ]
+    },
+    {
+      "id": "m6a-008",
+      "localId": "008",
+      "name": "レシラム",
+      "rarity": "None",
+      "dexId": [
+        643
+      ]
+    },
+    {
+      "id": "m6a-009",
+      "localId": "009",
+      "name": "ホゲータex",
+      "rarity": "Double rare",
+      "dexId": [
+        909
+      ]
+    },
+    {
+      "id": "m6a-010",
+      "localId": "010",
+      "name": "ヤドン",
+      "rarity": "None",
+      "dexId": [
+        79
+      ]
+    },
+    {
+      "id": "m6a-011",
+      "localId": "011",
+      "name": "ラプラス",
+      "rarity": "None",
+      "dexId": [
+        131
+      ]
+    },
+    {
+      "id": "m6a-012",
+      "localId": "012",
+      "name": "フリーザー",
+      "rarity": "None",
+      "dexId": [
+        144
+      ]
+    },
+    {
+      "id": "m6a-013",
+      "localId": "013",
+      "name": "カイオーガ",
+      "rarity": "None",
+      "dexId": [
+        382
+      ]
+    },
+    {
+      "id": "m6a-014",
+      "localId": "014",
+      "name": "パルキア",
+      "rarity": "None",
+      "dexId": [
+        484
+      ]
+    },
+    {
+      "id": "m6a-015",
+      "localId": "015",
+      "name": "ゲッコウガex",
+      "rarity": "Double rare",
+      "dexId": [
+        658
+      ]
+    },
+    {
+      "id": "m6a-016",
+      "localId": "016",
+      "name": "ヨワシ",
+      "rarity": "None",
+      "dexId": [
+        746
+      ]
+    },
+    {
+      "id": "m6a-017",
+      "localId": "017",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-018",
+      "localId": "018",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-019",
+      "localId": "019",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-020",
+      "localId": "020",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-021",
+      "localId": "021",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-022",
+      "localId": "022",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-023",
+      "localId": "023",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-024",
+      "localId": "024",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-025",
+      "localId": "025",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-026",
+      "localId": "026",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-027",
+      "localId": "027",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-028",
+      "localId": "028",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-029",
+      "localId": "029",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-030",
+      "localId": "030",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-031",
+      "localId": "031",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-032",
+      "localId": "032",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-033",
+      "localId": "033",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-034",
+      "localId": "034",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-035",
+      "localId": "035",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-036",
+      "localId": "036",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-037",
+      "localId": "037",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-038",
+      "localId": "038",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-039",
+      "localId": "039",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-040",
+      "localId": "040",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-041",
+      "localId": "041",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-042",
+      "localId": "042",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-043",
+      "localId": "043",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-044",
+      "localId": "044",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-045",
+      "localId": "045",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-046",
+      "localId": "046",
+      "name": "ピカチュウ",
+      "rarity": "None",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-047",
+      "localId": "047",
+      "name": "ピカチュウex",
+      "rarity": "Double rare",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-048",
+      "localId": "048",
+      "name": "ピカチュウex",
+      "rarity": "Double rare",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-049",
+      "localId": "049",
+      "name": "サンダー",
+      "rarity": "None",
+      "dexId": [
+        145
+      ]
+    },
+    {
+      "id": "m6a-050",
+      "localId": "050",
+      "name": "ゼクロム",
+      "rarity": "None",
+      "dexId": [
+        644
+      ]
+    },
+    {
+      "id": "m6a-051",
+      "localId": "051",
+      "name": "ストリンダー",
+      "rarity": "None",
+      "dexId": [
+        849
+      ]
+    },
+    {
+      "id": "m6a-052",
+      "localId": "052",
+      "name": "モルペコ",
+      "rarity": "None",
+      "dexId": [
+        877
+      ]
+    },
+    {
+      "id": "m6a-053",
+      "localId": "053",
+      "name": "ミライドン",
+      "rarity": "None",
+      "dexId": [
+        1008
+      ]
+    },
+    {
+      "id": "m6a-054",
+      "localId": "054",
+      "name": "ミュウツー",
+      "rarity": "None",
+      "dexId": [
+        150
+      ]
+    },
+    {
+      "id": "m6a-055",
+      "localId": "055",
+      "name": "ミュウツーex",
+      "rarity": "Double rare",
+      "dexId": [
+        150
+      ]
+    },
+    {
+      "id": "m6a-056",
+      "localId": "056",
+      "name": "ミュウ",
+      "rarity": "None",
+      "dexId": [
+        151
+      ]
+    },
+    {
+      "id": "m6a-057",
+      "localId": "057",
+      "name": "ミュウex",
+      "rarity": "Double rare",
+      "dexId": [
+        151
+      ]
+    },
+    {
+      "id": "m6a-058",
+      "localId": "058",
+      "name": "エーフィ",
+      "rarity": "None",
+      "dexId": [
+        196
+      ]
+    },
+    {
+      "id": "m6a-059",
+      "localId": "059",
+      "name": "ニンフィアex",
+      "rarity": "Double rare",
+      "dexId": [
+        700
+      ]
+    },
+    {
+      "id": "m6a-060",
+      "localId": "060",
+      "name": "アンノーン",
+      "rarity": "None",
+      "dexId": [
+        201
+      ]
+    },
+    {
+      "id": "m6a-061",
+      "localId": "061",
+      "name": "フワンテ",
+      "rarity": "None",
+      "dexId": [
+        425
+      ]
+    },
+    {
+      "id": "m6a-062",
+      "localId": "062",
+      "name": "シャンデラ",
+      "rarity": "None",
+      "dexId": [
+        609
+      ]
+    },
+    {
+      "id": "m6a-063",
+      "localId": "063",
+      "name": "ゼルネアス",
+      "rarity": "None",
+      "dexId": [
+        716
+      ]
+    },
+    {
+      "id": "m6a-064",
+      "localId": "064",
+      "name": "コスモッグ",
+      "rarity": "None",
+      "dexId": [
+        789
+      ]
+    },
+    {
+      "id": "m6a-065",
+      "localId": "065",
+      "name": "コスモウム",
+      "rarity": "None",
+      "dexId": [
+        790
+      ]
+    },
+    {
+      "id": "m6a-066",
+      "localId": "066",
+      "name": "ルナアーラ",
+      "rarity": "None",
+      "dexId": [
+        792
+      ]
+    },
+    {
+      "id": "m6a-067",
+      "localId": "067",
+      "name": "コレクレー",
+      "rarity": "None",
+      "dexId": [
+        999
+      ]
+    },
+    {
+      "id": "m6a-068",
+      "localId": "068",
+      "name": "グラードン",
+      "rarity": "None",
+      "dexId": [
+        383
+      ]
+    },
+    {
+      "id": "m6a-069",
+      "localId": "069",
+      "name": "ルカリオ",
+      "rarity": "None",
+      "dexId": [
+        448
+      ]
+    },
+    {
+      "id": "m6a-070",
+      "localId": "070",
+      "name": "ガマゲロゲ",
+      "rarity": "None",
+      "dexId": [
+        537
+      ]
+    },
+    {
+      "id": "m6a-071",
+      "localId": "071",
+      "name": "ルガルガン",
+      "rarity": "None",
+      "dexId": [
+        745
+      ]
+    },
+    {
+      "id": "m6a-072",
+      "localId": "072",
+      "name": "コライドン",
+      "rarity": "None",
+      "dexId": [
+        1007
+      ]
+    },
+    {
+      "id": "m6a-073",
+      "localId": "073",
+      "name": "ニドラン♀",
+      "rarity": "None",
+      "dexId": [
+        29
+      ]
+    },
+    {
+      "id": "m6a-074",
+      "localId": "074",
+      "name": "ニドリーナ",
+      "rarity": "None",
+      "dexId": [
+        30
+      ]
+    },
+    {
+      "id": "m6a-075",
+      "localId": "075",
+      "name": "アローラ ニャース",
+      "rarity": "None",
+      "dexId": [
+        52
+      ]
+    },
+    {
+      "id": "m6a-076",
+      "localId": "076",
+      "name": "ゲンガーex",
+      "rarity": "Double rare",
+      "dexId": [
+        94
+      ]
+    },
+    {
+      "id": "m6a-077",
+      "localId": "077",
+      "name": "ブラッキー",
+      "rarity": "None",
+      "dexId": [
+        197
+      ]
+    },
+    {
+      "id": "m6a-078",
+      "localId": "078",
+      "name": "ズルッグ",
+      "rarity": "None",
+      "dexId": [
+        559
+      ]
+    },
+    {
+      "id": "m6a-079",
+      "localId": "079",
+      "name": "イベルタル",
+      "rarity": "None",
+      "dexId": [
+        717
+      ]
+    },
+    {
+      "id": "m6a-080",
+      "localId": "080",
+      "name": "ガラル ニャース",
+      "rarity": "None",
+      "dexId": [
+        52
+      ]
+    },
+    {
+      "id": "m6a-081",
+      "localId": "081",
+      "name": "ジラーチex",
+      "rarity": "Double rare",
+      "dexId": [
+        385
+      ]
+    },
+    {
+      "id": "m6a-082",
+      "localId": "082",
+      "name": "ディアルガ",
+      "rarity": "None",
+      "dexId": [
+        483
+      ]
+    },
+    {
+      "id": "m6a-083",
+      "localId": "083",
+      "name": "ナットレイ",
+      "rarity": "None",
+      "dexId": [
+        598
+      ]
+    },
+    {
+      "id": "m6a-084",
+      "localId": "084",
+      "name": "ソルガレオ",
+      "rarity": "None",
+      "dexId": [
+        791
+      ]
+    },
+    {
+      "id": "m6a-085",
+      "localId": "085",
+      "name": "ザシアン",
+      "rarity": "None",
+      "dexId": [
+        888
+      ]
+    },
+    {
+      "id": "m6a-086",
+      "localId": "086",
+      "name": "ザマゼンタ",
+      "rarity": "None",
+      "dexId": [
+        889
+      ]
+    },
+    {
+      "id": "m6a-087",
+      "localId": "087",
+      "name": "サーフゴー",
+      "rarity": "None",
+      "dexId": [
+        1000
+      ]
+    },
+    {
+      "id": "m6a-088",
+      "localId": "088",
+      "name": "ボーマンダex",
+      "rarity": "Double rare",
+      "dexId": [
+        373
+      ]
+    },
+    {
+      "id": "m6a-089",
+      "localId": "089",
+      "name": "ジャラコ",
+      "rarity": "None",
+      "dexId": [
+        782
+      ]
+    },
+    {
+      "id": "m6a-090",
+      "localId": "090",
+      "name": "ジャランゴ",
+      "rarity": "None",
+      "dexId": [
+        783
+      ]
+    },
+    {
+      "id": "m6a-091",
+      "localId": "091",
+      "name": "ジャラランガ",
+      "rarity": "None",
+      "dexId": [
+        784
+      ]
+    },
+    {
+      "id": "m6a-092",
+      "localId": "092",
+      "name": "ニャース",
+      "rarity": "None",
+      "dexId": [
+        52
+      ]
+    },
+    {
+      "id": "m6a-093",
+      "localId": "093",
+      "name": "メタモン",
+      "rarity": "None",
+      "dexId": [
+        132
+      ]
+    },
+    {
+      "id": "m6a-094",
+      "localId": "094",
+      "name": "イーブイ",
+      "rarity": "None",
+      "dexId": [
+        133
+      ]
+    },
+    {
+      "id": "m6a-095",
+      "localId": "095",
+      "name": "カビゴン",
+      "rarity": "None",
+      "dexId": [
+        143
+      ]
+    },
+    {
+      "id": "m6a-096",
+      "localId": "096",
+      "name": "ププリン",
+      "rarity": "None",
+      "dexId": [
+        174
+      ]
+    },
+    {
+      "id": "m6a-097",
+      "localId": "097",
+      "name": "ルギア",
+      "rarity": "None",
+      "dexId": [
+        249
+      ]
+    },
+    {
+      "id": "m6a-098",
+      "localId": "098",
+      "name": "ヒスイ ゾロア",
+      "rarity": "None",
+      "dexId": [
+        570
+      ]
+    },
+    {
+      "id": "m6a-099",
+      "localId": "099",
+      "name": "ヒスイ ゾロアーク",
+      "rarity": "None",
+      "dexId": [
+        571
+      ]
+    },
+    {
+      "id": "m6a-100",
+      "localId": "100",
+      "name": "イッカネズミ",
+      "rarity": "None",
+      "dexId": [
+        925
+      ]
+    },
+    {
+      "id": "m6a-101",
+      "localId": "101",
+      "name": "ハイパーボール",
+      "rarity": "None",
+      "englishName": "Ultra Ball"
+    },
+    {
+      "id": "m6a-102",
+      "localId": "102",
+      "name": "ポケパッド",
+      "rarity": "None",
+      "englishName": "Poké Pad"
+    },
+    {
+      "id": "m6a-103",
+      "localId": "103",
+      "name": "ポケモンいれかえ",
+      "rarity": "None",
+      "englishName": "Switch"
+    },
+    {
+      "id": "m6a-104",
+      "localId": "104",
+      "name": "アローラ ナッシー",
+      "rarity": "Illustration rare",
+      "dexId": [
+        103
+      ]
+    },
+    {
+      "id": "m6a-105",
+      "localId": "105",
+      "name": "ファイヤー",
+      "rarity": "Illustration rare",
+      "dexId": [
+        146
+      ]
+    },
+    {
+      "id": "m6a-106",
+      "localId": "106",
+      "name": "ラプラス",
+      "rarity": "Illustration rare",
+      "dexId": [
+        131
+      ]
+    },
+    {
+      "id": "m6a-107",
+      "localId": "107",
+      "name": "フリーザー",
+      "rarity": "Illustration rare",
+      "dexId": [
+        144
+      ]
+    },
+    {
+      "id": "m6a-108",
+      "localId": "108",
+      "name": "サンダー",
+      "rarity": "Illustration rare",
+      "dexId": [
+        145
+      ]
+    },
+    {
+      "id": "m6a-109",
+      "localId": "109",
+      "name": "ストリンダー",
+      "rarity": "Illustration rare",
+      "dexId": [
+        849
+      ]
+    },
+    {
+      "id": "m6a-110",
+      "localId": "110",
+      "name": "モルペコ",
+      "rarity": "Illustration rare",
+      "dexId": [
+        877
+      ]
+    },
+    {
+      "id": "m6a-111",
+      "localId": "111",
+      "name": "フワンテ",
+      "rarity": "Illustration rare",
+      "dexId": [
+        425
+      ]
+    },
+    {
+      "id": "m6a-112",
+      "localId": "112",
+      "name": "シャンデラ",
+      "rarity": "Illustration rare",
+      "dexId": [
+        609
+      ]
+    },
+    {
+      "id": "m6a-113",
+      "localId": "113",
+      "name": "ルガルガン",
+      "rarity": "Illustration rare",
+      "dexId": [
+        745
+      ]
+    },
+    {
+      "id": "m6a-114",
+      "localId": "114",
+      "name": "ニドリーナ",
+      "rarity": "Illustration rare",
+      "dexId": [
+        30
+      ]
+    },
+    {
+      "id": "m6a-115",
+      "localId": "115",
+      "name": "アローラ ニャース",
+      "rarity": "Illustration rare",
+      "dexId": [
+        52
+      ]
+    },
+    {
+      "id": "m6a-116",
+      "localId": "116",
+      "name": "ズルッグ",
+      "rarity": "Illustration rare",
+      "dexId": [
+        559
+      ]
+    },
+    {
+      "id": "m6a-117",
+      "localId": "117",
+      "name": "ガラル ニャース",
+      "rarity": "Illustration rare",
+      "dexId": [
+        52
+      ]
+    },
+    {
+      "id": "m6a-118",
+      "localId": "118",
+      "name": "サーフゴー",
+      "rarity": "Illustration rare",
+      "dexId": [
+        1000
+      ]
+    },
+    {
+      "id": "m6a-119",
+      "localId": "119",
+      "name": "ジャラランガ",
+      "rarity": "Illustration rare",
+      "dexId": [
+        784
+      ]
+    },
+    {
+      "id": "m6a-120",
+      "localId": "120",
+      "name": "ニャース",
+      "rarity": "Illustration rare",
+      "dexId": [
+        52
+      ]
+    },
+    {
+      "id": "m6a-121",
+      "localId": "121",
+      "name": "メタモン",
+      "rarity": "Illustration rare",
+      "dexId": [
+        132
+      ]
+    },
+    {
+      "id": "m6a-122",
+      "localId": "122",
+      "name": "ヒスイ ゾロア",
+      "rarity": "Illustration rare",
+      "dexId": [
+        570
+      ]
+    },
+    {
+      "id": "m6a-123",
+      "localId": "123",
+      "name": "イッカネズミ",
+      "rarity": "Illustration rare",
+      "dexId": [
+        925
+      ]
+    },
+    {
+      "id": "m6a-124",
+      "localId": "124",
+      "name": "ホゲータex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        909
+      ]
+    },
+    {
+      "id": "m6a-125",
+      "localId": "125",
+      "name": "ゲッコウガex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        658
+      ]
+    },
+    {
+      "id": "m6a-126",
+      "localId": "126",
+      "name": "ピカチュウex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-127",
+      "localId": "127",
+      "name": "ピカチュウex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-128",
+      "localId": "128",
+      "name": "ミュウツーex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        150
+      ]
+    },
+    {
+      "id": "m6a-129",
+      "localId": "129",
+      "name": "ミュウex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        151
+      ]
+    },
+    {
+      "id": "m6a-130",
+      "localId": "130",
+      "name": "ニンフィアex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        700
+      ]
+    },
+    {
+      "id": "m6a-131",
+      "localId": "131",
+      "name": "ゲンガーex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        94
+      ]
+    },
+    {
+      "id": "m6a-132",
+      "localId": "132",
+      "name": "ジラーチex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        385
+      ]
+    },
+    {
+      "id": "m6a-133",
+      "localId": "133",
+      "name": "ボーマンダex",
+      "rarity": "Special illustration rare",
+      "dexId": [
+        373
+      ]
+    },
+    {
+      "id": "m6a-134",
+      "localId": "134",
+      "name": "ミュウツーex",
+      "rarity": "Futuristic Rare",
+      "dexId": [
+        150
+      ]
+    },
+    {
+      "id": "m6a-135",
+      "localId": "135",
+      "name": "ミュウex",
+      "rarity": "Futuristic Rare",
+      "dexId": [
+        151
+      ]
+    },
+    {
+      "id": "m6a-136",
+      "localId": "136",
+      "name": "ピカチュウ",
+      "rarity": "Classic Collection",
+      "dexId": [
+        25
+      ]
+    },
+    {
+      "id": "m6a-137",
+      "localId": "137",
+      "name": "リザードン",
+      "rarity": "Classic Collection",
+      "dexId": [
+        6
+      ]
+    },
+    {
+      "id": "m6a-138",
+      "localId": "138",
+      "name": "カスミ",
+      "rarity": "Classic Collection",
+      "englishName": "Misty"
+    },
+    {
+      "id": "m6a-139",
+      "localId": "139",
+      "name": "エリカのプリン",
+      "rarity": "Classic Collection",
+      "dexId": [
+        39
+      ]
+    },
+    {
+      "id": "m6a-140",
+      "localId": "140",
+      "name": "ニューラ",
+      "rarity": "Classic Collection",
+      "dexId": [
+        215
+      ]
+    },
+    {
+      "id": "m6a-141",
+      "localId": "141",
+      "name": "ひかるセレビィ",
+      "rarity": "Classic Collection",
+      "dexId": [
+        251
+      ]
+    },
+    {
+      "id": "m6a-142",
+      "localId": "142",
+      "name": "ルギア",
+      "rarity": "Classic Collection",
+      "dexId": [
+        249
+      ]
+    },
+    {
+      "id": "m6a-143",
+      "localId": "143",
+      "name": "エネコロロ",
+      "rarity": "Classic Collection",
+      "dexId": [
+        301
+      ]
+    },
+    {
+      "id": "m6a-144",
+      "localId": "144",
+      "name": "わるいバンギラス",
+      "rarity": "Classic Collection",
+      "dexId": [
+        248
+      ]
+    },
+    {
+      "id": "m6a-145",
+      "localId": "145",
+      "name": "ハッサムex",
+      "rarity": "Classic Collection",
+      "dexId": [
+        212
+      ]
+    },
+    {
+      "id": "m6a-146",
+      "localId": "146",
+      "name": "メタグロス",
+      "rarity": "Classic Collection",
+      "dexId": [
+        376
+      ]
+    },
+    {
+      "id": "m6a-147",
+      "localId": "147",
+      "name": "パルキア",
+      "rarity": "Classic Collection",
+      "dexId": [
+        484
+      ]
+    },
+    {
+      "id": "m6a-148",
+      "localId": "148",
+      "name": "ユクシー",
+      "rarity": "Classic Collection",
+      "dexId": [
+        480
+      ]
+    },
+    {
+      "id": "m6a-149",
+      "localId": "149",
+      "name": "クロバットG",
+      "rarity": "Classic Collection",
+      "dexId": [
+        169
+      ]
+    },
+    {
+      "id": "m6a-150",
+      "localId": "150",
+      "name": "ゲンガー",
+      "rarity": "Classic Collection",
+      "dexId": [
+        94
+      ]
+    },
+    {
+      "id": "m6a-151",
+      "localId": "151",
+      "name": "ダークライ＆クレセリアLEGEND",
+      "rarity": "Classic Collection",
+      "dexId": [
+        491,
+        488
+      ]
+    },
+    {
+      "id": "m6a-152",
+      "localId": "152",
+      "name": "ダークライ＆クレセリアLEGEND",
+      "rarity": "Classic Collection",
+      "dexId": [
+        491,
+        488
+      ]
+    },
+    {
+      "id": "m6a-153",
+      "localId": "153",
+      "name": "N",
+      "rarity": "Classic Collection",
+      "englishName": "N"
+    },
+    {
+      "id": "m6a-154",
+      "localId": "154",
+      "name": "レックウザEX",
+      "rarity": "Classic Collection",
+      "dexId": [
+        384
+      ]
+    },
+    {
+      "id": "m6a-155",
+      "localId": "155",
+      "name": "ゲノセクトEX",
+      "rarity": "Classic Collection",
+      "dexId": [
+        649
+      ]
+    },
+    {
+      "id": "m6a-156",
+      "localId": "156",
+      "name": "サーナイトEX",
+      "rarity": "Classic Collection",
+      "dexId": [
+        282
+      ]
+    },
+    {
+      "id": "m6a-157",
+      "localId": "157",
+      "name": "ゲッコウガBREAK",
+      "rarity": "Classic Collection",
+      "dexId": [
+        658
+      ]
+    },
+    {
+      "id": "m6a-158",
+      "localId": "158",
+      "name": "ソルガレオGX",
+      "rarity": "Classic Collection",
+      "dexId": [
+        791
+      ]
+    },
+    {
+      "id": "m6a-159",
+      "localId": "159",
+      "name": "マッシブーンGX",
+      "rarity": "Classic Collection",
+      "dexId": [
+        794
+      ]
+    },
+    {
+      "id": "m6a-160",
+      "localId": "160",
+      "name": "ピカチュウ&ゼクロムGX",
+      "rarity": "Classic Collection",
+      "dexId": [
+        25,
+        644
+      ]
+    },
+    {
+      "id": "m6a-161",
+      "localId": "161",
+      "name": "ザシアンV",
+      "rarity": "Classic Collection",
+      "dexId": [
+        888
+      ]
+    },
+    {
+      "id": "m6a-162",
+      "localId": "162",
+      "name": "ライコウ",
+      "rarity": "Classic Collection",
+      "dexId": [
+        243
+      ]
+    },
+    {
+      "id": "m6a-163",
+      "localId": "163",
+      "name": "ミュウVMAX",
+      "rarity": "Classic Collection",
+      "dexId": [
+        151
+      ]
+    },
+    {
+      "id": "m6a-164",
+      "localId": "164",
+      "name": "アルセウスVSTAR",
+      "rarity": "Classic Collection",
+      "dexId": [
+        493
+      ]
+    },
+    {
+      "id": "m6a-165",
+      "localId": "165",
+      "name": "コイキング",
+      "rarity": "Classic Collection",
+      "dexId": [
+        129
+      ]
+    },
+    {
+      "id": "m6a-B",
+      "localId": "B",
+      "name": "ミュウ",
+      "rarity": "RGB Rare",
+      "dexId": [
+        151
+      ]
+    },
+    {
+      "id": "m6a-DAR",
+      "localId": "DAR",
+      "name": "基本悪エネルギー",
+      "rarity": "None",
+      "englishName": "Basic Darkness Energy"
+    },
+    {
+      "id": "m6a-FIG",
+      "localId": "FIG",
+      "name": "基本闘エネルギー",
+      "rarity": "None",
+      "englishName": "Basic Fighting Energy"
+    },
+    {
+      "id": "m6a-FIR",
+      "localId": "FIR",
+      "name": "基本炎エネルギー",
+      "rarity": "None",
+      "englishName": "Basic Fire Energy"
+    },
+    {
+      "id": "m6a-G",
+      "localId": "G",
+      "name": "ミュウ",
+      "rarity": "RGB Rare",
+      "dexId": [
+        151
+      ]
+    },
+    {
+      "id": "m6a-GRA",
+      "localId": "GRA",
+      "name": "基本草エネルギー",
+      "rarity": "None",
+      "englishName": "Basic Grass Energy"
+    },
+    {
+      "id": "m6a-LIG",
+      "localId": "LIG",
+      "name": "基本雷エネルギー",
+      "rarity": "None",
+      "englishName": "Basic Lightning Energy"
+    },
+    {
+      "id": "m6a-MET",
+      "localId": "MET",
+      "name": "基本鋼エネルギー",
+      "rarity": "None",
+      "englishName": "Basic Metal Energy"
+    },
+    {
+      "id": "m6a-PSY",
+      "localId": "PSY",
+      "name": "基本超エネルギー",
+      "rarity": "None",
+      "englishName": "Basic Psychic Energy"
+    },
+    {
+      "id": "m6a-R",
+      "localId": "R",
+      "name": "ミュウ",
+      "rarity": "RGB Rare",
+      "dexId": [
+        151
+      ]
+    },
+    {
+      "id": "m6a-WAT",
+      "localId": "WAT",
+      "name": "基本水エネルギー",
+      "rarity": "None",
+      "englishName": "Basic Water Energy"
+    }
+  ]
+}
