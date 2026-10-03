@@ -52,8 +52,14 @@ test("explains how to recover when the TCGGO key is absent", async () => {
 
 test("normalises and paginates the Japanese M6a response", async () => {
   const originalFetch = globalThis.fetch;
+  const calls = [];
   globalThis.fetch = async (input) => {
-    const page = Number(new URL(input).searchParams.get("page"));
+    const requestUrl = new URL(input);
+    calls.push(requestUrl);
+    assert.equal(requestUrl.pathname, "/pokemon/episodes/448/cards");
+    assert.equal(requestUrl.searchParams.get("sort"), "card_number_lowest");
+    assert.equal(requestUrl.searchParams.has("lang"), false);
+    const page = Number(requestUrl.searchParams.get("page"));
     const start = page === 1 ? 1 : 51;
     const length = page === 1 ? 50 : 1;
     const data = Array.from({ length }, (_, index) => ({
@@ -63,7 +69,7 @@ test("normalises and paginates the Japanese M6a response", async () => {
       rarity: index === 0 && page === 1 ? "Futuristic Rare" : "Common",
       image: `https://images.example/${start + index}.webp`
     }));
-    return Response.json({ data, paging: { current: page, per_page: 50, results: 51 } });
+    return Response.json({ data, paging: { current: page, per_page: 50 }, results: 51 });
   };
 
   try {
@@ -75,6 +81,7 @@ test("normalises and paginates the Japanese M6a response", async () => {
     assert.equal(body.cardCount.official, 103);
     assert.equal(body.cardCount.total, 51);
     assert.equal(body.cards.length, 51);
+    assert.equal(calls.length, 2);
     assert.deepEqual(body.cards[0], {
       id: "tcggo-1", localId: "001", name: "ブラッキー (Umbreon)", englishName: "Umbreon",
       rarity: "Futuristic Rare", imageUrl: "https://images.example/1.webp", provider: "tcggo"
