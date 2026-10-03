@@ -16,6 +16,7 @@ Required Cloudflare bindings:
 - Secret: `ADMIN_PASSWORD` (unique password with at least 16 characters)
 - Secret: `GITHUB_TOKEN` (fine-grained token with Contents read/write permission for this repository only)
 - Secret: `PIKAQIAN_API_KEY` (optional; enables Simplified Chinese card lookup in quick add. Set and card lists are cached in D1 — sets for 7 days, card lists for 30 days — to stay within the free 500 requests/month)
+- Secret: `TCGGO_API_KEY` (optional; enables the temporary Japanese M6a 30th Celebration fallback. Obtain it through TCGGO on RapidAPI; responses are cached in D1 for 24 hours)
 - Optional environment variable: `GITHUB_REPOSITORY` (defaults to `kollectozam/kollectozamkollectables`)
 - Optional environment variable: `GITHUB_BRANCH` (defaults to `main`)
 
@@ -28,7 +29,7 @@ Apply `migrations/0001_inventory.sql` to the production D1 database before using
 Open `/admin/` on your phone, sign in and tap **Quick add cards**:
 
 1. Choose the language, condition and set once. They stay selected for the following cards.
-2. Take the front photo (the back is optional) and type the card number. The name, rarity and full number are filled in from [TCGdex](https://tcgdex.dev); for non-English cards the English Pokémon name comes from [PokeAPI](https://pokeapi.co).
+2. Take the front photo (the back is optional) and type the card number. The name, rarity and full number are filled in from [TCGdex](https://tcgdex.dev); Japanese M6a temporarily falls back to [TCGGO](https://www.tcggo.com/api-docs/v1/), and non-English Pokémon names can be completed through [PokeAPI](https://pokeapi.co).
 3. Enter the price and quantity, then **Add to batch**. The batch is saved on the phone until it is submitted.
 4. Tap **Submit** to publish (or save as drafts). Cards are sent in groups of eight, each group as one GitHub commit.
 
