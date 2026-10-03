@@ -61,13 +61,13 @@ async function tcggoM6aCards(env){
   return cached(env,"tcggo:m6a",TCGGO_TTL,async()=>{
     const cards=[],seen=new Set();
     for(let page=1;page<=10;page++){
-      const url=new URL(`https://${TCGGO_HOST}/v1/tcgapi/pokemon/episodes/${TCGGO_M6A_EPISODE}/cards`);
-      url.searchParams.set("page",String(page));url.searchParams.set("per_page","50");url.searchParams.set("lang","jp");url.searchParams.set("sort","number_lowest");
+      const url=new URL(`https://${TCGGO_HOST}/pokemon/episodes/${TCGGO_M6A_EPISODE}/cards`);
+      url.searchParams.set("page",String(page));url.searchParams.set("per_page","50");url.searchParams.set("sort","card_number_lowest");
       const response=await fetch(url,{headers:{"X-RapidAPI-Key":env.TCGGO_API_KEY,"X-RapidAPI-Host":TCGGO_HOST,"accept":"application/json"}});
       if(!response.ok){const failure=new Error(response.status===401||response.status===403?"TCGGO rejected the API key":response.status===429?"TCGGO lookup limit reached":`TCGGO lookup failed (${response.status})`);failure.status=502;throw failure}
       const body=await response.json(),rows=Array.isArray(body.data)?body.data:[];
       for(const card of rows){const id=String(card.id??""),localId=String(card.card_number??"");if(!id||!localId||seen.has(id))continue;seen.add(id);cards.push({id:`tcggo-${id}`,localId,name:clean(card.name,120),englishName:tcggoEnglishName(card.name),rarity:clean(card.rarity,60),imageUrl:validImageUrl(card.image),provider:"tcggo"})}
-      const total=Number(body.paging?.results)||0;if(!rows.length||(total&&cards.length>=total)||rows.length<50)break;
+      const total=Number(body.results)||0;if(!rows.length||(total&&cards.length>=total)||rows.length<50)break;
     }
     if(!cards.length){const failure=new Error("TCGGO returned no Japanese 30th Celebration cards");failure.status=502;throw failure}
     return cards;
